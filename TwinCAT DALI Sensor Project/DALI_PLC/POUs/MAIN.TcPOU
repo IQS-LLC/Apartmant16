@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="MAIN" Id="{7d680b2f-8db9-4f1e-8602-1c7527d7b88c}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+    // Latches and timers
+    bManualMode     : BOOL;   // TRUE = button has priority
+    tOverrideHold   : TON;    // 60 s manual override hold timer
+    bRestartTimer   : BOOL;   // one-shot to reset/restart the TON
+    prevBtnState    : BOOL;   // for edge detection on gButtonLightOn
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// === 1) Always run sub-programs so they update their outputs ===
+POU_DALI_Prog();         // updates gvlDALI.gButtonLightOn
+POU_DALI_Sensor_Prog();  // updates gvlDALI.gMotionLightOn
+
+// === 2) Detect button change and start/restart manual override ===
+IF gvlDALI.gButtonLightOn <> prevBtnState THEN
+    gvlDALI.gLightOn := gvlDALI.gButtonLightOn;
+    bManualMode := TRUE;
+    bRestartTimer := TRUE;
+END_IF
+prevBtnState := gvlDALI.gButtonLightOn;
+
+// === 3) Handle override timer restart/reset ===
+IF bRestartTimer THEN
+    tOverrideHold(IN := FALSE, PT := T#60S); // reset TON for 1 cycle
+    bRestartTimer := FALSE;
+ELSE
+    tOverrideHold(IN := bManualMode, PT := T#60S);
+END_IF
+
+// === 4) When 60s is up, release manual mode and immediately apply motion state ===
+IF tOverrideHold.Q THEN
+    bManualMode := FALSE;
+    gvlDALI.gLightOn := gvlDALI.gMotionLightOn; // immediate handover
+END_IF
+
+// === 5) While in manual mode, ignore motion ===
+IF NOT bManualMode THEN
+    gvlDALI.gLightOn := gvlDALI.gMotionLightOn;
+END_IF
+
+// === 6) Send final state to DALI ===
+POU_DALI_Prog_Final();]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="135" Count="31" />
+      <LineId Id="36" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

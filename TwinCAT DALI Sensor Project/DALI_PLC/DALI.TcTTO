@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <Task Name="DALI" Id="{eb79965e-f149-4213-9f49-4eca98fd1e1b}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>2000</CycleTime>
+    <Priority>4</Priority>
+    <PouCall>
+      <Name>POU_Comm</Name>
+    </PouCall>
+    <TaskFBGuid>{ec894a1d-0905-4f51-a21e-4cf8d6ab0479}</TaskFBGuid>
+    <Fb_init>{79074d0f-5c05-40e2-bf5b-ae38254ff192}</Fb_init>
+    <Fb_exit>{aa9162f8-568b-42a7-a244-22f09ede1e94}</Fb_exit>
+    <CycleUpdate>{66a9ad4e-6806-473d-88df-039c748e5ffe}</CycleUpdate>
+    <PostCycleUpdate>{e8195928-b2ce-4845-95e7-79671508fa10}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

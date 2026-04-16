@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <GVL Name="gvlDALI" Id="{ab3b6ad3-2b9d-4e07-901d-5f8aa5a92bd9}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	bSwitchOn           AT %I* : BOOL;
+    stKL6821InData      AT %I* : ST_KL6821InData;
+    stKL6821OutData     AT %Q* : ST_KL6821OutData;
+	gLightOn         : BOOL; // Final output state
+    gButtonLightOn   AT %I* : BOOL; // Output from button POU
+    gMotionLightOn   AT %I* : BOOL; // Output from motion POU
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
