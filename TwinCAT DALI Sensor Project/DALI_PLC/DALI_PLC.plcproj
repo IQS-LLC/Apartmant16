@@ -34,13 +34,7 @@
     <Compile Include="POUs\POU_Comm.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POU_DALI_Prog.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\POU_DALI_Sensor_Prog.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\POU_DALI_Prog_Final.TcPOU">
+    <Compile Include="POUs\POU_DALIModule.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

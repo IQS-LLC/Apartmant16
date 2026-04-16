@@ -54,7 +54,7 @@
 			</SubItem>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{7B210F77-F342-4638-8FD7-0870B9E914E0}" TargetNetId="5.166.231.3.1.1" ShowHideConfigurations="#x6">
+	<Project ProjectGUID="{7B210F77-F342-4638-8FD7-0870B9E914E0}" Target64Bit="true" ShowHideConfigurations="#x6">
 		<System>
 			<Settings>
 				<IoIdleTask Priority="8"/>
@@ -70,7 +70,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{BBD3E97C-7C2F-45A5-AAAD-2EA0084893FC}" Name="DALI_PLC" PrjFilePath="DALI_PLC\DALI_PLC.plcproj" TmcFilePath="DALI_PLC\DALI_PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="DALI_PLC\DALI_PLC.tmc" TmcHash="{9C2C4A73-3C24-ABE2-8C97-A72A8838993C}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="DALI_PLC\DALI_PLC.tmc" TmcHash="{5F67285A-C2B8-7A91-2DFC-E7170AD2BD0C}">
 					<Name>DALI_PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">

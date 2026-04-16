@@ -1,0 +1,703 @@
+<?xml version="1.0"?>
+<TcEventSources Version="2">
+	<Source>
+		<GUID>{7E5E7629-9105-4DFE-8745-01BF6FDB54FC}</GUID>
+		<Name LcId="1031">TcDALIEventClass</Name>
+		<Name LcId="1033">TcDALIEventClass</Name>
+		<Event>
+			<Id>1</Id>
+			<Message LcId="1031">Keine Antwort von der DALI-Klemme.</Message>
+			<Message LcId="1033">No response from the DALI terminal.</Message>
+		</Event>
+		<Event>
+			<Id>2</Id>
+			<Message LcId="1031"><![CDATA[Keine Antwort vom DALI-Gerät ('nAddress': {0} / 'eAddressType': {1}).]]></Message>
+			<Message LcId="1033"><![CDATA[No response from the DALI device ('nAddress': {0} / 'eAddressType': {1}).]]></Message>
+		</Event>
+		<Event>
+			<Id>3</Id>
+			<Message LcId="1031">Überlauf Befehlspuffer.</Message>
+			<Message LcId="1033">Command buffer overflow.</Message>
+		</Event>
+		<Event>
+			<Id>4</Id>
+			<Message LcId="1031">Keine Antwort von dem Kommunikationsbaustein.</Message>
+			<Message LcId="1033">No answer from the communication block.</Message>
+		</Event>
+		<Event>
+			<Id>5</Id>
+			<Message LcId="1031">Während der Übertragung eines DALI-Telegramms wurde auf dem Rückkanal (Backward Channel) eine Kollision mit den Sendedaten eines anderen DALI-Gerät erkannt.</Message>
+			<Message LcId="1033">DALI collision detected on the backward channel: during the transfer of a DALI telegram, a collision with the transmit data of another DALI device was detected.</Message>
+		</Event>
+		<Event>
+			<Id>6</Id>
+			<Message LcId="1031">Während der Übertragung eines DALI-Telegramms wurde auf dem Hinkanal (Forward Channel) eine Kollision mit den Sendedaten eines anderen DALI-Steuergerät erkannt. Der Fehler tritt auch auf, sobald die 24 V an der Busklemme fehlen.</Message>
+			<Message LcId="1033">DALI collision detected on the forward channel: during the transfer of a DALI telegram, a collision with the transmit data of another DALI control device was detected. The error also occurs if the 24 V supply is missing at the power contacts of the bus terminal.</Message>
+		</Event>
+		<Event>
+			<Id>7</Id>
+			<Message LcId="1031">Überlastung des internen DALI-Netzteils der Busklemme (Busunterspannung).</Message>
+			<Message LcId="1033">Overload of the internal DALI power supply unit of the bus terminal (bus under-voltage).</Message>
+		</Event>
+		<Event>
+			<Id>8</Id>
+			<Message LcId="1031">Bei Nutzung des internen DALI-Netzteils: Fehler Netzteil erkannt.</Message>
+			<Message LcId="1033">When using the internal DALI power supply unit: Power supply unit fault detected.</Message>
+		</Event>
+		<Event>
+			<Id>9</Id>
+			<Message LcId="1031">Prozessabbild wurde durch die Eingänge DI1 oder DI2 der Klemme deaktiviert.</Message>
+			<Message LcId="1033">The process image was disabled by the DI1 or DI2 inputs of the terminal.</Message>
+		</Event>
+		<Event>
+			<Id>10</Id>
+			<Message LcId="1031">Die 24 V DC Versorgungsspannung an den Anschlüssen 1 und 5 der KL6821/EL6821 fehlt, oder es wurde ein Kurzschluss auf dem DALI-Bus erkannt.</Message>
+			<Message LcId="1033">Missing the 24 V DC input voltage at pin 1 and 5 of the KL6821/EL6821 or short-circuit detected on the DALI bus.</Message>
+		</Event>
+		<Event>
+			<Id>11</Id>
+			<Message LcId="1031">Auf Grund von Kollisionen auf dem DALI-Bus konnte der DALI-Befehl nicht versendet werden.</Message>
+			<Message LcId="1033">Because there are collisions on the DALI bus, the DALI command could not be sent.</Message>
+		</Event>
+		<Event>
+			<Id>12</Id>
+			<Message LcId="1031">Der Eintrag im Empfangsbuffer der KL6821/EL6821 ist ungültig.</Message>
+			<Message LcId="1033">The item in the receive buffer of the KL6821/EL6821 is invalid.</Message>
+		</Event>
+		<Event>
+			<Id>13</Id>
+			<Message LcId="1031">Der Interface-Pointer auf den Kommunikationsbaustein ist nicht initialisiert.</Message>
+			<Message LcId="1033">The interface pointer to the communication function block is not initialized.</Message>
+		</Event>
+		<Event>
+			<Id>14</Id>
+			<Message LcId="1031">Der Befehlspuffer wurde länger blockiert als erlaubt.</Message>
+			<Message LcId="1033">The command buffer has been blocked for longer than permitted.</Message>
+		</Event>
+		<Event>
+			<Id>15</Id>
+			<Message LcId="1031">Bei der Adressierung hat die Klemme einen Fehler zurückgeliefert.</Message>
+			<Message LcId="1033">The terminal has returned an error during addressing.</Message>
+		</Event>
+		<Event>
+			<Id>16</Id>
+			<Message LcId="1031">Bei der Adressierung hat die Klemme einen Kurzschluss auf dem Bus erkannt.</Message>
+			<Message LcId="1033">During addressing the terminal has detected a short circuit on the bus.</Message>
+		</Event>
+		<Event>
+			<Id>17</Id>
+			<Message LcId="1031">Bei der Adressierung hat die Klemme erkannt, dass keine freie Kurzadresse vorhanden ist.</Message>
+			<Message LcId="1033">During addressing the terminal has detected that there is no further short address available.</Message>
+		</Event>
+		<Event>
+			<Id>18</Id>
+			<Message LcId="1031">Bei der Adressierung hat die Klemme erkannt, dass mehrere Geräte die gleiche Langadresse besitzen.</Message>
+			<Message LcId="1033">During addressing the terminal has detected that several devices have the same long address.</Message>
+		</Event>
+		<Event>
+			<Id>19</Id>
+			<Message LcId="1031">Die Adressierung ist 3x fehlgeschlagen.</Message>
+			<Message LcId="1033">Addressing has failed 3 times.</Message>
+		</Event>
+		<Event>
+			<Id>20</Id>
+			<Message LcId="1031">Zeitüberschreitung bei der Adressierung. Die Klemme hat nach dem Starten der Adressierung keine Antwort zurückgeliefert.</Message>
+			<Message LcId="1033">Timeout during addressing. The terminal has not sent a reply following the start of addressing.</Message>
+		</Event>
+		<Event>
+			<Id>21</Id>
+			<Message LcId="1031"><![CDATA[Keine Antwort von der Instanz ('nInstanceAddress': {0} / 'eInstanceAddressType': {1}) des DALI-Geräts ('nAddress': {2} / 'eAddressType': {3}).]]></Message>
+			<Message LcId="1033"><![CDATA[No response from the instance ('nInstanceAddress': {0} / 'eInstanceAddressType': {1}) of the DALI device ('nAddress': {2} / 'eAddressType': {3}).]]></Message>
+		</Event>
+		<Event>
+			<Id>22</Id>
+			<Message LcId="1031">Die KL6811 unterstützt nur 16 Bit Befehle (IEC 62386-102 und IEC 62386-2xx).</Message>
+			<Message LcId="1033">The KL6811 supports only 16 Bit commands (IEC 62386-102 and IEC 62386-2xx).</Message>
+		</Event>
+		<Event>
+			<Id>23</Id>
+			<Message LcId="1031">Während der Konfiguration der Klemme ist ein Fehler aufgetreten.</Message>
+			<Message LcId="1033">An error occurred during configuration of the terminal.</Message>
+		</Event>
+		<Event>
+			<Id>24</Id>
+			<Message LcId="1031">Keine Antwort vom DALI-Gerät.</Message>
+			<Message LcId="1033">No response from the DALI Device.</Message>
+		</Event>
+		<Event>
+			<Id>25</Id>
+			<Message LcId="1031">Es ist keine freie Kurzadresse mehr vorhanden.</Message>
+			<Message LcId="1033">There is no further short address available.</Message>
+		</Event>
+		<Event>
+			<Id>26</Id>
+			<Message LcId="1031">Während der Adressierung ist ein Fehler aufgetreten.</Message>
+			<Message LcId="1033">An error occurred during addressing.</Message>
+		</Event>
+		<Event>
+			<Id>27</Id>
+			<Message LcId="1031"><![CDATA[Die Antwort vom DALI-Gerät ('nAddress': {0} / 'eAddressType': {1}) ist ungültig.]]></Message>
+			<Message LcId="1033"><![CDATA[The response from the DALI device is invalid ('nAddress': {0} / 'eAddressType': {1}).]]></Message>
+		</Event>
+		<Event>
+			<Id>28</Id>
+			<Message LcId="1031"><![CDATA[Die Antwort von der Instanz ('nInstanceAddress': {0} / 'eInstanceAddressType': {1}) des DALI-Geräts ('nAddress': {2} / 'eAddressType': {3}) ist ungültig.]]></Message>
+			<Message LcId="1033"><![CDATA[The response from the instance ('nInstanceAddress': {0} / 'eInstanceAddressType': {1}) of the DALI device ('nAddress': {2} / 'eAddressType': {3}) is invalid.]]></Message>
+		</Event>
+		<Event>
+			<Id>29</Id>
+			<Message LcId="1031">Dieser DALI-Befehl wird von der Simulation nicht unterstützt.</Message>
+			<Message LcId="1033">This DALI command is not supported by the simulation.</Message>
+		</Event>
+		<Event>
+			<Id>30</Id>
+			<Message LcId="1031">Der Zugriff auf den Befehlspuffer ist wegen einer Blockierung durch den Mutex nicht möglich.</Message>
+			<Message LcId="1033">Access to the command buffer is not possible because of a blocking by the mutex.</Message>
+		</Event>
+		<Event>
+			<Id>31</Id>
+			<Message LcId="1031">Der Eintrag im Empfangsbuffer der KL6821/EL6821 hat einen Fehler im Bit-Timing.</Message>
+			<Message LcId="1033">The item in the receive buffer of the KL6821/EL6821 has an error in bit timing.</Message>
+		</Event>
+		<Event>
+			<Id>32</Id>
+			<Message LcId="1031">Der Eintrag im Empfangsbuffer der KL6821/EL6821 hat eine ungültige Anzahl von Bíts.</Message>
+			<Message LcId="1033">The item in the receive buffer of the KL6821/EL6821 has an invalid number of Bíts.</Message>
+		</Event>
+		<Event>
+			<Id>33</Id>
+			<Message LcId="1031">Bei dem Eintrag im Empfangsbuffer der KL6821/EL6821 ist ein Fehler während der Dekodierung aufgetreten.</Message>
+			<Message LcId="1033">The entry in the receive buffer of the KL6821/EL6821 encountered an error during decoding.</Message>
+		</Event>
+		<Event>
+			<Id>34</Id>
+			<Message LcId="1031">Bei der Adressierung hat die Klemme einen fehlenden Response von einem Gerät erkannt.</Message>
+			<Message LcId="1033">During addressing the terminal detected a missing response of a device.</Message>
+		</Event>
+		<Event>
+			<Id>173</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nLuxRangeBrightness' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0…1).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nLuxRangeBrightness' (actual value: {0}) lies outside of the valid range (0…1).]]></Message>
+		</Event>
+		<Event>
+			<Id>174</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eAlarmEventPriority' (aktueller Wert: E_DALIEventPriority.{0}) liegt außerhalb des gültigen Bereichs (E_DALIEventPriority.Low...E_DALIEventPriority.MiddleHigh).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eAlarmEventPriority' (actual value: E_DALIEventPriority.{0}) lies outside of the valid range (E_DALIEventPriority.Low...E_DALIEventPriority.MiddleHigh).]]></Message>
+		</Event>
+		<Event>
+			<Id>175</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nAlarm{0}Hysteresis' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (0...4194303).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nAlarm{0}Hysteresis' (actual value: {1}) lies outside of the valid range (0...4194303).]]></Message>
+		</Event>
+		<Event>
+			<Id>176</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nAlarm{0}Level' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (0...4194303).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nAlarm{0}Level' (actual alue: {1}) lies outside of the valid range (0...4194303).]]></Message>
+		</Event>
+		<Event>
+			<Id>177</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nAlarmReportTimer' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...1275 s).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nAlarmReportTimer' (actual value: {0}) lies outside of the valid range (0...1275 s).]]></Message>
+		</Event>
+		<Event>
+			<Id>178</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nReportTimer' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...1275 s).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nReportTimer' (actual value: {0}) lies outside of the valid range (0...1275 s).]]></Message>
+		</Event>
+		<Event>
+			<Id>179</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nAlarmLevel' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...4194303).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nAlarmLevel' (actual value: {0}) lies outside of the valid range (0...4194303).]]></Message>
+		</Event>
+		<Event>
+			<Id>180</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nAlarmHysteresis' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...4194303).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nAlarmHysteresis' (actual value: {0}) lies outside of the valid range (0...4194303).]]></Message>
+		</Event>
+		<Event>
+			<Id>181</Id>
+			<Message LcId="1031"><![CDATA[Das Schreiben von Wert {0} in Offset {1} der Speicherbank {2} vom DALI-Gerät ('nAddress': {3} / 'eAddressType': {4}) war nicht erfolgreich.]]></Message>
+			<Message LcId="1033"><![CDATA[Writing value {0} to offset {1} of memory bank {2} from DALI device ('nAddress': {3} / 'eAddressType': {4}) was not successful.]]></Message>
+		</Event>
+		<Event>
+			<Id>182</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eColourType' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (E_DALIColourType.XyCoordinate...E_DALIColourType.RGBWAFControl).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eColourType' (actual value: {0}) lies outside of the valid range (E_DALIColourType.XyCoordinate...E_DALIColourType.RGBWAFControl).]]></Message>
+		</Event>
+		<Event>
+			<Id>183</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nEmergencyLevel' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (emergencyMinLevel...emergencyMaxLevel, 255).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nEmergencyLevel' (actual value: {0}) lies outside of the valid range (emergencyMinLevel...emergencyMaxLevel, 255).]]></Message>
+		</Event>
+		<Event>
+			<Id>184</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nDurationTestInterval' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...97).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nDurationTestInterval' (actual value: {0}) lies outside of the valid range (0...97).]]></Message>
+		</Event>
+		<Event>
+			<Id>185</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nSensitivity{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (1...100).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nSensitivity{0}' (actual value: {1}) lies outside of the valid range (1...100).]]></Message>
+		</Event>
+		<Event>
+			<Id>186</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nSensitivity{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (0...4).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nSensitivity{0}' (actual value: {1}) lies outside of the valid range (0...4).]]></Message>
+		</Event>
+		<Event>
+			<Id>187</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eExtendedFadeTimeBase' (aktueller Wert: E_DALIExtendedFadeTimeBase.{0}) liegt außerhalb des gültigen Bereichs (E_DALIExtendedFadeTimeBase.Base01...E_DALIExtendedFadeTimeBase.Base16).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eExtendedFadeTimeBase' (actual value: E_DALIExtendedFadeTimeBase.{0}) lies outside of the valid range (E_DALIExtendedFadeTimeBase.Base01...E_DALIExtendedFadeTimeBase.Base16).]]></Message>
+		</Event>
+		<Event>
+			<Id>188</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eExtendedFadeTimeMultiplier' (aktueller Wert: E_DALIExtendedFadeTimeMultiplier.{0}) liegt außerhalb des gültigen Bereichs (E_DALIExtendedFadeTimeMultiplier.Disabled...E_DALIExtendedFadeTimeMultiplier.Multiplier1min).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eExtendedFadeTimeMultiplier' (actual value: E_DALIExtendedFadeTimeMultiplier.{0}) lies outside of the valid range (E_DALIExtendedFadeTimeMultiplier.Disabled...E_DALIExtendedFadeTimeMultiplier.Multiplier1min).]]></Message>
+		</Event>
+		<Event>
+			<Id>189</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'tDeadtime' (aktueller Wert: T#{0}MS) liegt außerhalb des gültigen Bereichs (2 s...1 h).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'tDeadtime' (actual value: T#{0}MS) lies outside of the valid range (2 s...1 h).]]></Message>
+		</Event>
+		<Event>
+			<Id>190</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nHysteresis' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...25 %).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nHysteresis' (actual value: {0}) lies outside of the valid range (0...25 %).]]></Message>
+		</Event>
+		<Event>
+			<Id>191</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nDeadtimeTimer' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...12750 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nDeadtimeTimer' (actual value: {0}) lies outside of the valid range (0...12750 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>192</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nHoldTimer' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (1...2538 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nHoldTimer' (actual value: {0}) lies outside of the valid range (1...2538 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>193</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nStuckTimer' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (5…255 s).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nStuckTimer' (actual value: {0}) lies outside of the valid range (5...255 s).]]></Message>
+		</Event>
+		<Event>
+			<Id>194</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nShort' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (tShortMin...255).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nShort' (actual value: {0}) lies outside of the valid range (tShortMin...255).]]></Message>
+		</Event>
+		<Event>
+			<Id>195</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nShortTimer{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (tShortMin...5100 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nShortTimer{0}' (actual value: {1}) lies outside of the valid range (tShortMin...5100 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>196</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nShortTimer' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (tShortMin...5100 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nShortTimer' (actual value: {0}) lies outside of the valid range (tShortMin...5100 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>197</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nDoubleTimer{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (0, tDoubleMin...2000 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nDoubleTimer{0}' (actual value: {1}) lies outside of the valid range (0, tDoubleMin...2000 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>198</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nDoubleTimer' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0, tDoubleMin...2000 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nDoubleTimer' (actual value: {0}) lies outside of the valid range (0, tDoubleMin...2000 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>199</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nRepeatTimer' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (100...2000 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nRepeatTimer' (actual value: {0}) lies outside of the valid range (100...2000 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>200</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eEventScheme' (aktueller Wert: E_DALIEventScheme.{0}) liegt außerhalb des gültigen Bereichs (siehe Datentyp E_DALIEventScheme).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eEventScheme' (actual value: E_DALIEventScheme.{0}) lies outside of the valid range (see data type E_DALIEventScheme).]]></Message>
+		</Event>
+		<Event>
+			<Id>201</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nAddress' (aktueller Wert: {0}) ist eine Gruppenadresse und liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nAddress' (actual value: {0}) is a group address and lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>202</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eEventPriority{0}' (aktueller Wert: E_DALIEventPriority.{1}) liegt außerhalb des gültigen Bereichs (E_DALIEventPriority.Low...E_DALIEventPriority.MiddleHigh).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eEventPriority{0}' (actual value: E_DALIEventPriority.{1}) lies outside of the valid range (E_DALIEventPriority.Low...E_DALIEventPriority.MiddleHigh).]]></Message>
+		</Event>
+		<Event>
+			<Id>203</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nALS{0}CorrectionFactor{1}' (aktueller Wert: {2}) liegt außerhalb des gültigen Bereichs (0,1…5,0).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nALS{0}CorrectionFactor{1}' (actual value: {2}) lies outside the valid range (0.1…5.0).]]></Message>
+		</Event>
+		<Event>
+			<Id>204</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nRoomCorrectionFactor{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (5…200).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nRoomCorrectionFactor{0}' (actual value: {1}) lies outside of the valid range (5…200).]]></Message>
+		</Event>
+		<Event>
+			<Id>205</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nSwitchOnLevel' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs ('nMinLevel': {1}...'nMaxLevel': {2}).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nSwitchOnLevel' (actual value: {0}) lies outside of the valid range ('nMinLevel': {1}...'nMaxLevel': {2}).]]></Message>
+		</Event>
+		<Event>
+			<Id>206</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nHysteresis{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (0…25 %).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nHysteresis{0}' (actual value: {1}) lies outside of the valid range (0…25 %).]]></Message>
+		</Event>
+		<Event>
+			<Id>207</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nDeadtimeTimer{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (0…12750 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nDeadtimeTimer{0}' (actual value: {1}) lies outside of the valid range (0…12750 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>208</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nSensitivity{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (1…5).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nSensitivity{0}' (actual value: {1}) lies outside of the valid range (1…5).]]></Message>
+		</Event>
+		<Event>
+			<Id>209</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nSensitivity{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (0…100 %).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nSensitivity{0}' (actual value: {1}) lies outside of the valid range (0…100 %).]]></Message>
+		</Event>
+		<Event>
+			<Id>210</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nDetectionRange{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (0…100 %).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nDetectionRange{0}' (actual value: {1}) lies outside of the valid range (0…100 %).]]></Message>
+		</Event>
+		<Event>
+			<Id>211</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nHoldTimer{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (1…2538 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nHoldTimer{0}' (actual value: {1}) lies outside of the valid range (1…2538 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>212</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nDeadtimeTimer{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (0…12750 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nDeadtimeTimer{0}' (actual value: {1}) lies outside of the valid range (0…12750 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>213</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nHysteresis' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (1...65535).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nHysteresis' (actual value: {0}) lies outside of the valid range (1...65535).]]></Message>
+		</Event>
+		<Event>
+			<Id>214</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nDeadtimeTimer{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (0...12750 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nDeadtimeTimer{0}' (actual value: {1}) lies outside of the valid range (0...12750 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>215</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nStuckTimer{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (5…255 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nStuckTimer{0}' (actual value: {1}) lies outside of the valid range (5…255 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>216</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nRepeatTimer{0}' (aktueller Wert: {1}) liegt außerhalb des gültigen Bereichs (100...2000 ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nRepeatTimer{0}' (actual value: {1}) lies outside of the valid range (100...2000 ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>217</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nUpSwitchOffThreshold' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (1...255).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nUpSwitchOffThreshold' (actual value: {0}) lies outside of the valid range (1...255).]]></Message>
+		</Event>
+		<Event>
+			<Id>218</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nUpSwitchOnThreshold' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (1...255).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nUpSwitchOnThreshold' (actual value: {0}) lies outside of the valid range (1...255).]]></Message>
+		</Event>
+		<Event>
+			<Id>219</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nLevelMemoryMode' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (1...254).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nLevelMemoryMode' (actual value: {0}) lies outside of the valid range (1...254).]]></Message>
+		</Event>
+		<Event>
+			<Id>220</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nMinLevel' (aktueller Wert: {0}) ist größer als 'nMaxLevel' (aktueller Wert: {1}).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nMinLevel' (actual value: {0}) is greater than 'nMaxLevel' (actual value: {1}).]]></Message>
+		</Event>
+		<Event>
+			<Id>221</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nReferenceDeviceAddress' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...63).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nReferenceDeviceAddress' (actual value: {0}) lies outside of the valid range (0...63).]]></Message>
+		</Event>
+		<Event>
+			<Id>222</Id>
+			<Message LcId="1031">Bei dem Auslesen von Offset {0} aus der Speicherbank {1} ist ein Fehler aufgetreten.</Message>
+			<Message LcId="1033">An error occurred during reading offset {0} from memory bank {1}.</Message>
+		</Event>
+		<Event>
+			<Id>223</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nSubRangeStart' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...{1}).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nSubRangeStart' (actual value: {0}) lies outside of the valid range (0...{1}).]]></Message>
+		</Event>
+		<Event>
+			<Id>224</Id>
+			<Message LcId="1031">Bei dem Auslesen der Speicherbank ist ein Fehler aufgetreten. Das DTR0 (aktueller Wert: {0}) hat nicht den erwarteten Wert von {1}.</Message>
+			<Message LcId="1033">An error occurred during reading the memory bank. The DTR0 (actual value: {0}) does not have the expected value of {1}.</Message>
+		</Event>
+		<Event>
+			<Id>225</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nSubRangeEnd' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...{1}).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nSubRangeEnd' (actual value: {0}) lies outside of the valid range (0...{1}).]]></Message>
+		</Event>
+		<Event>
+			<Id>226</Id>
+			<Message LcId="1031"><![CDATA[Das DALI-Gerät ('nAddress': {0} / 'eAddressType': {1}) liefert TMASK zurück. Der Wert steht derzeit nicht zur Verfügung.]]></Message>
+			<Message LcId="1033"><![CDATA[The DALI device ('nAddress': {0} / 'eAddressType': {1}) returned TMASK. The value is temporarily not available.]]></Message>
+		</Event>
+		<Event>
+			<Id>227</Id>
+			<Message LcId="1031"><![CDATA[Das DALI-Gerät ('nAddress': {0} / 'eAddressType': {1}) liefert MASK zurück. Der Wert steht nicht zur Verfügung.]]></Message>
+			<Message LcId="1033"><![CDATA[The DALI device ('nAddress': {0} / 'eAddressType': {1}) returned MASK. The value is not available.]]></Message>
+		</Event>
+		<Event>
+			<Id>228</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nInternalControlGearReferenceTemperature' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (-60...193 °C).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nInternalControlGearReferenceTemperature' (actual value: {0}) lies outside of the valid range (-60...193 °C).]]></Message>
+		</Event>
+		<Event>
+			<Id>229</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nLightSourceOnTimeResettable' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...4294967293 s).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nLightSourceOnTimeResettable' (actual value: {0}) lies outside of the valid range (0...4294967293 s).]]></Message>
+		</Event>
+		<Event>
+			<Id>230</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nLightSourceStartCounterResettable' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...16777213).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nLightSourceStartCounterResettable' (actual value: {0}) lies outside of the valid range (0...16777213).]]></Message>
+		</Event>
+		<Event>
+			<Id>231</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nRatedMedianUsefulLifeOfLuminaire' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...253).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nRatedMedianUsefulLifeOfLuminaire' (actual value: {0}) lies outside of the valid range (0...253).]]></Message>
+		</Event>
+		<Event>
+			<Id>232</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nRatedMedianUsefulLightSourceStarts' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...65533).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nRatedMedianUsefulLightSourceStarts' (actual value: {0}) lies outside of the valid range (0...65533).]]></Message>
+		</Event>
+		<Event>
+			<Id>233</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nInstanceNumber' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nInstanceNumber' (actual value: {0}) lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>234</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nShortAddress' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...63).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nShortAddress' (actual value: {0}) lies outside of the valid range (0...63).]]></Message>
+		</Event>
+		<Event>
+			<Id>235</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nSubRangeEnd' (aktueller Wert: {0}) ist kleiner als 'nSubRangeStart' (aktueller Wert: {1}).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nSubRangeEnd' (actual value: {0}) is less than nSubRangeStart' (actual value: {1}).]]></Message>
+		</Event>
+		<Event>
+			<Id>236</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eFastFadeTime' (aktueller Wert: E_DALIFastFadeTime.{0}) liegt außerhalb des gültigen Bereichs (E_DALIFastFadeTime.Disabled...E_DALIFastFadeTime.T700ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eFastFadeTime' (actual value: E_DALIFastFadeTime.{0}) lies outside of the valid range (E_DALIFastFadeTime.Disabled...E_DALIFastFadeTime.T700ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>237</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eDimmingCurve' (aktueller Wert: E_DALIDimmingCurve.{0}) liegt außerhalb des gültigen Bereichs (siehe Datentyp E_DALIDimmingCurve).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eDimmingCurve' (actual value: E_DALIDimmingCurve.{0}) lies outside of the valid range (see data type E_DALIDimmingCurve).]]></Message>
+		</Event>
+		<Event>
+			<Id>238</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eEventPriority' (aktueller Wert: E_DALIEventPriority.{0}) liegt außerhalb des gültigen Bereichs (E_DALIEventPriority.Low...E_DALIEventPriority.MiddleHigh).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eEventPriority' (actual value: E_DALIEventPriority.{0}) lies outside of the valid range (E_DALIEventPriority.Low...E_DALIEventPriority.MiddleHigh).]]></Message>
+		</Event>
+		<Event>
+			<Id>239</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nShortAddress' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...63, 255).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nShortAddress' (actual value: {0}) lies outside of the valid range (0...63, 255).]]></Message>
+		</Event>
+		<Event>
+			<Id>240</Id>
+			<Message LcId="1031"><![CDATA[Parameter '{0}' definiert eine Instanzgruppe (aktueller Wert: {1}) und liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter '{0}' defines an instance group (actual value: {1}) and lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>241</Id>
+			<Message LcId="1031"><![CDATA[Parameter '{0}' definiert eine Gerätegruppe (aktueller Wert: {1}) und liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter '{0}' defines a device group (actual value: {1}) and lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>242</Id>
+			<Message LcId="1031"><![CDATA[Parameter '{0}' definiert eine Kurzadresse (aktueller Wert: {1}) und liegt außerhalb des gültigen Bereichs (0...63).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter '{0}' defines a short address (actual value: {1}) and lies outside of the valid range (0...63).]]></Message>
+		</Event>
+		<Event>
+			<Id>243</Id>
+			<Message LcId="1031"><![CDATA[Parameter '{0}' definiert eine Instanznummer (aktueller Wert: {1}) und liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter '{0}' defines an instance number (actual value: {1}) and lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>244</Id>
+			<Message LcId="1031"><![CDATA[Parameter '{0}' definiert einen Instanztyp (aktueller Wert: {1}) und liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter '{0}' defines an instance type (actual value: {1}) and lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>245</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nHysteresis' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...25).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nHysteresis' (actual value: {0}) lies outside of the valid range (0...25).]]></Message>
+		</Event>
+		<Event>
+			<Id>246</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nHold' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...254).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nHold' (actual value: {0}) lies outside of the valid range (0...254).]]></Message>
+		</Event>
+		<Event>
+			<Id>247</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nDouble' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0, tDoubleMin...100).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nDouble' (actual value: {0}) lies outside of the valid range (0, tDoubleMin...100).]]></Message>
+		</Event>
+		<Event>
+			<Id>248</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nRepeat' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (5...100).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nRepeat' (actual value: {0}) lies outside of the valid range (5...100).]]></Message>
+		</Event>
+		<Event>
+			<Id>249</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nStuck' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (5...255).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nStuck' (actual value: {0}) lies outside of the valid range (5...255).]]></Message>
+		</Event>
+		<Event>
+			<Id>250</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nResolution' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (1...64).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nResolution' (actual value: {0}) lies outside of the valid range (1...64).]]></Message>
+		</Event>
+		<Event>
+			<Id>251</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nEventFilter' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (16#00_0000...16#FF_FFFF).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nEventFilter' (actual value: {0}) lies outside of the valid range (16#00_0000...16#FF_FFFF).]]></Message>
+		</Event>
+		<Event>
+			<Id>252</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'aChangeAddressList' ist leer.]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'aChangeAddressList' is empty.]]></Message>
+		</Event>
+		<Event>
+			<Id>253</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'aChangeAddressList' enthält einen ungültigen Kurzadressen-Eintrag (Index: {0}).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'aChangeAddressList' contains an invalid short address entry (Index: {0}).]]></Message>
+		</Event>
+		<Event>
+			<Id>254</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'aChangeAddressList' enthält einen doppelten Listeneintrag bei den Kurzadressen (Index: {0} / {1}).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'aChangeAddressList' contains a double list entry in the short addresses (Index: {0} / {1}).]]></Message>
+		</Event>
+		<Event>
+			<Id>255</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'aChangeAddressList' enthält einen Eintrag für eine neue Kurzadresse, die jedoch schon für ein Gerät vergeben ist, welches nicht von den Änderungen betroffen ist. Die Adressen wurden zurück geändert (Index: {0}).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'aChangeAddressList' contains an entry for a new short address which, however, is already assigned to a device that is not affected by the changes. The addresses were changed back (Index: {0}).]]></Message>
+		</Event>
+		<Event>
+			<Id>256</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'cMaxResponseTableEntries' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (2...250).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'cMaxResponseTableEntries' (actual value: {0}) lies outside of the valid range (2...250).]]></Message>
+		</Event>
+		<Event>
+			<Id>257</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'cMaxEventTableEntries' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (2...250).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'cMaxEventTableEntries' (actual value: {0}) lies outside of the valid range (2...250).]]></Message>
+		</Event>
+		<Event>
+			<Id>258</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'cTimeoutLockCommandBuffers' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (2...120 s).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'cTimeoutLockCommandBuffers' (actual value: {0}) lies outside of the valid range (2...120 s).]]></Message>
+		</Event>
+		<Event>
+			<Id>259</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'cMaxCommandBufferEntries' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (2...250).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'cMaxCommandBufferEntries' (actual value: {0}) lies outside of the valid range (2...250).]]></Message>
+		</Event>
+		<Event>
+			<Id>260</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eDataFrameType' liegt außerhalb des gültigen Bereichs.]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eDataFrameType' lies outside the valid range.]]></Message>
+		</Event>
+		<Event>
+			<Id>261</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eAddressType' liegt außerhalb des gültigen Bereichs.]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eAddressType' lies outside of the valid range.]]></Message>
+		</Event>
+		<Event>
+			<Id>262</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nAddress' (aktueller Wert: {0}) ist eine Kurzadresse und liegt außerhalb des gültigen Bereichs (0...63).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nAddress' (actual value: {0}) is a short address and lies outside of the valid range (0...63).]]></Message>
+		</Event>
+		<Event>
+			<Id>263</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nAddress' (aktueller Wert: {0}) ist eine Gruppenadresse und liegt außerhalb des gültigen Bereichs (0...15).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nAddress' (actual value: {0}) is a group address and lies outside of the valid range (0...15).]]></Message>
+		</Event>
+		<Event>
+			<Id>264</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eCommandPriority' (aktueller Wert: E_DALICommandPriority.{0}) liegt außerhalb des gültigen Bereichs (E_DALICommandPriority.Low...E_DALICommandPriority.High).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eCommandPriority' (actual value: E_DALICommandPriority.{0}) lies outside of the valid range (E_DALICommandPriority.Low...E_DALICommandPriority.High).]]></Message>
+		</Event>
+		<Event>
+			<Id>265</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eInstanceAddressType' liegt außerhalb des gültigen Bereichs.]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eInstanceAddressType' lies outside the valid range.]]></Message>
+		</Event>
+		<Event>
+			<Id>266</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nInstanceAddress' (aktueller Wert: {0}) ist eine Instanznummer und liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nInstanceAddress' (actual value: {0}) is an instance number and lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>267</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nInstanceAddress' (aktueller Wert: {0}) ist eine Instanzgruppe und liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nInstanceAddress' (actual value: {0}) is an instance group and lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>268</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nInstanceAddress' (aktueller Wert: {0}) ist ein Instanztyp und liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nInstanceAddress' (actual value: {0}) is an instance type and lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>269</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nInstanceAddress' (aktueller Wert: {0}) ist eine Funktion auf Instanz-Nummern Ebene und liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nInstanceAddress' (actual value: {0}) is a feature on instance number level and lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>270</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nInstanceAddress' (aktueller Wert: {0}) ist eine Funktion auf Instanz-Gruppen Ebene und liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nInstanceAddress' (actual value: {0}) is a feature on instance group level and lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>271</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nInstanceAddress' (aktueller Wert: {0}) ist eine Funktion auf Instanz-Typ Ebene und liegt außerhalb des gültigen Bereichs (0...31).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nInstanceAddress' (actual value: {0}) is a feature on instance type level and lies outside of the valid range (0...31).]]></Message>
+		</Event>
+		<Event>
+			<Id>272</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nGroup' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...15).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nGroup' (actual value: {0}) lies outside of the valid range (0...15).]]></Message>
+		</Event>
+		<Event>
+			<Id>273</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nScene' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...15).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nScene' (actual value: {0}) lies outside of the valid range (0...15).]]></Message>
+		</Event>
+		<Event>
+			<Id>274</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eFadeTime' (aktueller Wert: E_DALIFadeTime.{0}) liegt außerhalb des gültigen Bereichs (E_DALIFadeTime.Disabled...E_DALIFadeTime.T90500ms).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eFadeTime' (actual value: E_DALIFadeTime.{0}) lies outside of the valid range (E_DALIFadeTime.Disabled...E_DALIFadeTime.T90500ms).]]></Message>
+		</Event>
+		<Event>
+			<Id>275</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'eFadeRate' (aktueller Wert: E_DALIFadeRate.{0}) liegt außerhalb des gültigen Bereichs (E_DALIFadeRate.N003StepsPerSec...E_DALIFadeRate.N358StepsPerSec).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'eFadeRate' (actual value: E_DALIFadeRate.{0}) lies outside of the valid range (E_DALIFadeRate.N003StepsPerSec...E_DALIFadeRate.N358StepsPerSec).]]></Message>
+		</Event>
+		<Event>
+			<Id>276</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nNewShortAddress' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...63, 255).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nNewShortAddress' (actual value: {0}) lies outside of the valid range (0...63, 255).]]></Message>
+		</Event>
+		<Event>
+			<Id>277</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nStartWithShortAddress' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (0...63).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nStartWithShortAddress' (actual value: {0}) lies outside of the valid range (0...63).]]></Message>
+		</Event>
+	</Source>
+</TcEventSources>

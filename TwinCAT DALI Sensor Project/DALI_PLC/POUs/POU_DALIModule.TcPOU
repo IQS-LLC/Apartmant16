@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="POU_DALIModule" Id="{094157ad-d07e-40ab-81bc-9862c0e30825}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM POU_DALIModule
+VAR
+    // Dimmer 1 - Address 1
+    fbDALI102Dimmer1Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 2 - Address 2
+    fbDALI102Dimmer2Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+
+    bInitialize                 : BOOL := FALSE;
+    motionSensor                : BOOL;
+
+    // Dimmer 1 variables
+    bRecallMaxLevel             : BOOL;
+    bRecallMinLevel             : BOOL;
+    //bOn                       : BOOL;
+    //bOff                      : BOOL;
+    bToggle                     : BOOL;
+    bGoToScene                  : BOOL;
+    nScene                      : BYTE;
+    bSetLevel                   : BOOL;
+    nLevel                      : BYTE := 254;
+    nLevelMemoryMode            : BYTE := 70;
+    nReferenceDeviceAddress     : BYTE;
+    tCycleActualLevel           : TIME := T#5S;
+    nOptions                    : DWORD := 0;
+    nActualLevel                : BYTE;
+
+    // Dimmer 2 variables
+    bRecallMaxLevel_2           : BOOL;
+    bRecallMinLevel_2           : BOOL;
+    //bOn_2                     : BOOL;
+    //bOff_2                    : BOOL;
+    bToggle_2                   : BOOL;
+    bGoToScene_2                : BOOL;
+    nScene_2                    : BYTE;
+    bSetLevel_2                 : BOOL;
+    nLevel_2                    : BYTE := 254;
+    nLevelMemoryMode_2          : BYTE := 70;
+    nReferenceDeviceAddress_2   : BYTE;
+    tCycleActualLevel_2         : TIME := T#5S;
+    nOptions_2                  : DWORD := 0;
+    nActualLevel_2              : BYTE;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ── Dimmer 1 (Address 1) ────────────────────────────────────────────────────
+fbDALI102Dimmer1Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 1,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel,
+    bRecallMinLevel             := bRecallMinLevel,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle,
+    bGoToScene                  := bGoToScene,
+    nScene                      := nScene,
+    bSetLevel                   := bSetLevel,
+    nLevel                      := nLevel,
+    nLevelMemoryMode            := nLevelMemoryMode,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress,
+    tCycleActualLevel           := tCycleActualLevel,
+    nOptions                    := nOptions
+);
+nActualLevel                    := fbDALI102Dimmer1Switch.nActualLevel;
+
+// ── Dimmer 2 (Address 2) ────────────────────────────────────────────────────
+fbDALI102Dimmer2Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 2,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_2,
+    bRecallMinLevel             := bRecallMinLevel_2,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_2,
+    bGoToScene                  := bGoToScene_2,
+    nScene                      := nScene_2,
+    bSetLevel                   := bSetLevel_2,
+    nLevel                      := nLevel_2,
+    nLevelMemoryMode            := nLevelMemoryMode_2,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_2,
+    tCycleActualLevel           := tCycleActualLevel_2,
+    nOptions                    := nOptions_2
+);
+nActualLevel_2                  := fbDALI102Dimmer2Switch.nActualLevel;]]></ST>
+    </Implementation>
+    <LineIds Name="POU_DALIModule">
+      <LineId Id="86" Count="41" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
