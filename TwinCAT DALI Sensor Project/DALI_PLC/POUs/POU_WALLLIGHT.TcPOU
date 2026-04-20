@@ -3,12 +3,26 @@
   <POU Name="POU_WALLLIGHT" Id="{840098ec-0897-43ea-8320-196cc3c37fca}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM POU_WALLLIGHT
 VAR
-END_VAR
-]]></Declaration>
+    bRelay_1    : BOOL;
+    bRelay_2    : BOOL;
+    bRelay_3    : BOOL;
+    bRelay_4    : BOOL;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[// ── Light 1 ──────────────────────────────────────────────────────────────────
+gvlDALI.aWallRelay[1] := bRelay_1;
+
+// ── Light 2 ──────────────────────────────────────────────────────────────────
+gvlDALI.aWallRelay[2] := bRelay_2;
+
+// ── Light 3 ──────────────────────────────────────────────────────────────────
+gvlDALI.aWallRelay[3] := bRelay_3;
+
+// ── Light 4 ──────────────────────────────────────────────────────────────────
+gvlDALI.aWallRelay[4] := bRelay_4;]]></ST>
     </Implementation>
     <LineIds Name="POU_WALLLIGHT">
+      <LineId Id="63" Count="9" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

@@ -14,7 +14,10 @@ VAR_GLOBAL
 
     // Actual level readback (read by PyADS)
     aPyActualLevel  : ARRAY[1..16] OF BYTE;
-
+	     aWallRelay  : ARRAY[1..4] OF BOOL;  // AT %Q*
+	aPyWallRelay    : ARRAY[1..4] OF BOOL;  // from PyADS (app)
+	aPyWallRelayState   : ARRAY[1..4] OF BOOL;  // readback → app
+	
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

@@ -6,9 +6,27 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[// ── DALI: App → Dimmer levels (already synced in POU_DALIModule via GVL) ─────
+// gvlDALI.aPyLevel[1..16]    written by app → read in POU_DALIModule
+// gvlDALI.aPySetLevel[1..16] written by app → rising edge in POU_DALIModule
+
+// ── DALI: Actual levels → App (readback) ─────────────────────────────────────
+// gvlDALI.aPyActualLevel[1..16] written by POU_DALIModule → read by app
+
+// ── Wall lights: App → Relay ──────────────────────────────────────────────────
+POU_WALLLIGHT.bRelay_1 := gvlDALI.aPyWallRelay[1];
+POU_WALLLIGHT.bRelay_2 := gvlDALI.aPyWallRelay[2];
+POU_WALLLIGHT.bRelay_3 := gvlDALI.aPyWallRelay[3];
+POU_WALLLIGHT.bRelay_4 := gvlDALI.aPyWallRelay[4];
+
+// ── Wall lights: State → App (readback) ──────────────────────────────────────
+gvlDALI.aPyWallRelayState[1] := POU_WALLLIGHT.bRelay_1;
+gvlDALI.aPyWallRelayState[2] := POU_WALLLIGHT.bRelay_2;
+gvlDALI.aPyWallRelayState[3] := POU_WALLLIGHT.bRelay_3;
+gvlDALI.aPyWallRelayState[4] := POU_WALLLIGHT.bRelay_4;]]></ST>
     </Implementation>
     <LineIds Name="PyADS_POU">
+      <LineId Id="26" Count="16" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
