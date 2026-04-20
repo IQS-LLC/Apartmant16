@@ -365,3 +365,11 @@ if __name__ == "__main__":
         print(controller.read_all_levels())
         print(f"Button light on: {controller.read_button_light_on()}")
         print(f"Motion light on: {controller.read_motion_light_on()}")
+
+def set_wall_relay(self, relay: int, state: bool) -> None:
+    self._ensure_connected()
+    self.plc.write_by_name(f"gvlDALI.aPyWallRelay[{relay}]", state, pyads.PLCTYPE_BOOL)
+
+def read_wall_relay_state(self, relay: int) -> bool:
+    self._ensure_connected()
+    return self.plc.read_by_name(f"gvlDALI.aPyWallRelayState[{relay}]", pyads.PLCTYPE_BOOL)
