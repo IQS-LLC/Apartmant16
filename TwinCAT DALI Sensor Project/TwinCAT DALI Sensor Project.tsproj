@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.66">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.74">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{9A955222-AEEB-8157-F0A3-131368033DED}" Namespace="Tc3_DALI" AutoDeleteType="true">ST_KL6821InData</Name>
@@ -70,7 +70,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{BBD3E97C-7C2F-45A5-AAAD-2EA0084893FC}" Name="DALI_PLC" PrjFilePath="DALI_PLC\DALI_PLC.plcproj" TmcFilePath="DALI_PLC\DALI_PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="DALI_PLC\DALI_PLC.tmc" TmcHash="{5F67285A-C2B8-7A91-2DFC-E7170AD2BD0C}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="DALI_PLC\DALI_PLC.tmc" TmcHash="{544FA941-8289-4953-6221-F5F20472B2A6}">
 					<Name>DALI_PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">

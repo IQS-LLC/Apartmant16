@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
   <GVL Name="gvlDALI" Id="{ab3b6ad3-2b9d-4e07-901d-5f8aa5a92bd9}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
@@ -9,6 +9,12 @@ VAR_GLOBAL
 	gLightOn         : BOOL; // Final output state
     gButtonLightOn   AT %I* : BOOL; // Output from button POU
     gMotionLightOn   AT %I* : BOOL; // Output from motion POU
+    aPyLevel        : ARRAY[1..16] OF BYTE;     // desired level per dimmer
+    aPySetLevel     : ARRAY[1..16] OF BOOL;     // rising edge triggers set
+
+    // Actual level readback (read by PyADS)
+    aPyActualLevel  : ARRAY[1..16] OF BYTE;
+
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

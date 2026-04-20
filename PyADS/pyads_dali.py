@@ -7,6 +7,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 # DALI Constants
 DALI_MAX_LEVEL = 254
 DALI_MIN_LEVEL = 0

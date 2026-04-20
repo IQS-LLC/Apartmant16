@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
   <POU Name="POU_DALIModule" Id="{094157ad-d07e-40ab-81bc-9862c0e30825}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM POU_DALIModule
 VAR
@@ -7,6 +7,34 @@ VAR
     fbDALI102Dimmer1Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
     // Dimmer 2 - Address 2
     fbDALI102Dimmer2Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 3 - Address 3
+    fbDALI102Dimmer3Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 4 - Address 4
+    fbDALI102Dimmer4Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 5 - Address 5
+    fbDALI102Dimmer5Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 6 - Address 6
+    fbDALI102Dimmer6Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 7 - Address 7
+    fbDALI102Dimmer7Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 8 - Address 8
+    fbDALI102Dimmer8Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 9 - Address 9
+    fbDALI102Dimmer9Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 10 - Address 10
+    fbDALI102Dimmer10Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 11 - Address 11
+    fbDALI102Dimmer11Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 12 - Address 12
+    fbDALI102Dimmer12Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 13 - Address 13
+    fbDALI102Dimmer13Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 14 - Address 14
+    fbDALI102Dimmer14Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 15 - Address 15
+    fbDALI102Dimmer15Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    // Dimmer 16 - Address 16
+    fbDALI102Dimmer16Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
 
     bInitialize                 : BOOL := FALSE;
     motionSensor                : BOOL;
@@ -42,9 +70,267 @@ VAR
     tCycleActualLevel_2         : TIME := T#5S;
     nOptions_2                  : DWORD := 0;
     nActualLevel_2              : BYTE;
+
+    // Dimmer 3 variables
+    bRecallMaxLevel_3           : BOOL;
+    bRecallMinLevel_3           : BOOL;
+    //bOn_3                     : BOOL;
+    //bOff_3                    : BOOL;
+    bToggle_3                   : BOOL;
+    bGoToScene_3                : BOOL;
+    nScene_3                    : BYTE;
+    bSetLevel_3                 : BOOL;
+    nLevel_3                    : BYTE := 254;
+    nLevelMemoryMode_3          : BYTE := 70;
+    nReferenceDeviceAddress_3   : BYTE;
+    tCycleActualLevel_3         : TIME := T#5S;
+    nOptions_3                  : DWORD := 0;
+    nActualLevel_3              : BYTE;
+
+    // Dimmer 4 variables
+    bRecallMaxLevel_4           : BOOL;
+    bRecallMinLevel_4           : BOOL;
+    //bOn_4                     : BOOL;
+    //bOff_4                    : BOOL;
+    bToggle_4                   : BOOL;
+    bGoToScene_4                : BOOL;
+    nScene_4                    : BYTE;
+    bSetLevel_4                 : BOOL;
+    nLevel_4                    : BYTE := 254;
+    nLevelMemoryMode_4          : BYTE := 70;
+    nReferenceDeviceAddress_4   : BYTE;
+    tCycleActualLevel_4         : TIME := T#5S;
+    nOptions_4                  : DWORD := 0;
+    nActualLevel_4              : BYTE;
+
+    // Dimmer 5 variables
+    bRecallMaxLevel_5           : BOOL;
+    bRecallMinLevel_5           : BOOL;
+    //bOn_5                     : BOOL;
+    //bOff_5                    : BOOL;
+    bToggle_5                   : BOOL;
+    bGoToScene_5                : BOOL;
+    nScene_5                    : BYTE;
+    bSetLevel_5                 : BOOL;
+    nLevel_5                    : BYTE := 254;
+    nLevelMemoryMode_5          : BYTE := 70;
+    nReferenceDeviceAddress_5   : BYTE;
+    tCycleActualLevel_5         : TIME := T#5S;
+    nOptions_5                  : DWORD := 0;
+    nActualLevel_5              : BYTE;
+
+    // Dimmer 6 variables
+    bRecallMaxLevel_6           : BOOL;
+    bRecallMinLevel_6           : BOOL;
+    //bOn_6                     : BOOL;
+    //bOff_6                    : BOOL;
+    bToggle_6                   : BOOL;
+    bGoToScene_6                : BOOL;
+    nScene_6                    : BYTE;
+    bSetLevel_6                 : BOOL;
+    nLevel_6                    : BYTE := 254;
+    nLevelMemoryMode_6          : BYTE := 70;
+    nReferenceDeviceAddress_6   : BYTE;
+    tCycleActualLevel_6         : TIME := T#5S;
+    nOptions_6                  : DWORD := 0;
+    nActualLevel_6              : BYTE;
+
+    // Dimmer 7 variables
+    bRecallMaxLevel_7           : BOOL;
+    bRecallMinLevel_7           : BOOL;
+    //bOn_7                     : BOOL;
+    //bOff_7                    : BOOL;
+    bToggle_7                   : BOOL;
+    bGoToScene_7                : BOOL;
+    nScene_7                    : BYTE;
+    bSetLevel_7                 : BOOL;
+    nLevel_7                    : BYTE := 254;
+    nLevelMemoryMode_7          : BYTE := 70;
+    nReferenceDeviceAddress_7   : BYTE;
+    tCycleActualLevel_7         : TIME := T#5S;
+    nOptions_7                  : DWORD := 0;
+    nActualLevel_7              : BYTE;
+
+    // Dimmer 8 variables
+    bRecallMaxLevel_8           : BOOL;
+    bRecallMinLevel_8           : BOOL;
+    //bOn_8                     : BOOL;
+    //bOff_8                    : BOOL;
+    bToggle_8                   : BOOL;
+    bGoToScene_8                : BOOL;
+    nScene_8                    : BYTE;
+    bSetLevel_8                 : BOOL;
+    nLevel_8                    : BYTE := 254;
+    nLevelMemoryMode_8          : BYTE := 70;
+    nReferenceDeviceAddress_8   : BYTE;
+    tCycleActualLevel_8         : TIME := T#5S;
+    nOptions_8                  : DWORD := 0;
+    nActualLevel_8              : BYTE;
+
+    // Dimmer 9 variables
+    bRecallMaxLevel_9           : BOOL;
+    bRecallMinLevel_9           : BOOL;
+    //bOn_9                     : BOOL;
+    //bOff_9                    : BOOL;
+    bToggle_9                   : BOOL;
+    bGoToScene_9                : BOOL;
+    nScene_9                    : BYTE;
+    bSetLevel_9                 : BOOL;
+    nLevel_9                    : BYTE := 254;
+    nLevelMemoryMode_9          : BYTE := 70;
+    nReferenceDeviceAddress_9   : BYTE;
+    tCycleActualLevel_9         : TIME := T#5S;
+    nOptions_9                  : DWORD := 0;
+    nActualLevel_9              : BYTE;
+
+    // Dimmer 10 variables
+    bRecallMaxLevel_10          : BOOL;
+    bRecallMinLevel_10          : BOOL;
+    //bOn_10                    : BOOL;
+    //bOff_10                   : BOOL;
+    bToggle_10                  : BOOL;
+    bGoToScene_10               : BOOL;
+    nScene_10                   : BYTE;
+    bSetLevel_10                : BOOL;
+    nLevel_10                   : BYTE := 254;
+    nLevelMemoryMode_10         : BYTE := 70;
+    nReferenceDeviceAddress_10  : BYTE;
+    tCycleActualLevel_10        : TIME := T#5S;
+    nOptions_10                 : DWORD := 0;
+    nActualLevel_10             : BYTE;
+
+    // Dimmer 11 variables
+    bRecallMaxLevel_11          : BOOL;
+    bRecallMinLevel_11          : BOOL;
+    //bOn_11                    : BOOL;
+    //bOff_11                   : BOOL;
+    bToggle_11                  : BOOL;
+    bGoToScene_11               : BOOL;
+    nScene_11                   : BYTE;
+    bSetLevel_11                : BOOL;
+    nLevel_11                   : BYTE := 254;
+    nLevelMemoryMode_11         : BYTE := 70;
+    nReferenceDeviceAddress_11  : BYTE;
+    tCycleActualLevel_11        : TIME := T#5S;
+    nOptions_11                 : DWORD := 0;
+    nActualLevel_11             : BYTE;
+
+    // Dimmer 12 variables
+    bRecallMaxLevel_12          : BOOL;
+    bRecallMinLevel_12          : BOOL;
+    //bOn_12                    : BOOL;
+    //bOff_12                   : BOOL;
+    bToggle_12                  : BOOL;
+    bGoToScene_12               : BOOL;
+    nScene_12                   : BYTE;
+    bSetLevel_12                : BOOL;
+    nLevel_12                   : BYTE := 254;
+    nLevelMemoryMode_12         : BYTE := 70;
+    nReferenceDeviceAddress_12  : BYTE;
+    tCycleActualLevel_12        : TIME := T#5S;
+    nOptions_12                 : DWORD := 0;
+    nActualLevel_12             : BYTE;
+
+    // Dimmer 13 variables
+    bRecallMaxLevel_13          : BOOL;
+    bRecallMinLevel_13          : BOOL;
+    //bOn_13                    : BOOL;
+    //bOff_13                   : BOOL;
+    bToggle_13                  : BOOL;
+    bGoToScene_13               : BOOL;
+    nScene_13                   : BYTE;
+    bSetLevel_13                : BOOL;
+    nLevel_13                   : BYTE := 254;
+    nLevelMemoryMode_13         : BYTE := 70;
+    nReferenceDeviceAddress_13  : BYTE;
+    tCycleActualLevel_13        : TIME := T#5S;
+    nOptions_13                 : DWORD := 0;
+    nActualLevel_13             : BYTE;
+
+    // Dimmer 14 variables
+    bRecallMaxLevel_14          : BOOL;
+    bRecallMinLevel_14          : BOOL;
+    //bOn_14                    : BOOL;
+    //bOff_14                   : BOOL;
+    bToggle_14                  : BOOL;
+    bGoToScene_14               : BOOL;
+    nScene_14                   : BYTE;
+    bSetLevel_14                : BOOL;
+    nLevel_14                   : BYTE := 254;
+    nLevelMemoryMode_14         : BYTE := 70;
+    nReferenceDeviceAddress_14  : BYTE;
+    tCycleActualLevel_14        : TIME := T#5S;
+    nOptions_14                 : DWORD := 0;
+    nActualLevel_14             : BYTE;
+
+    // Dimmer 15 variables
+    bRecallMaxLevel_15          : BOOL;
+    bRecallMinLevel_15          : BOOL;
+    //bOn_15                    : BOOL;
+    //bOff_15                   : BOOL;
+    bToggle_15                  : BOOL;
+    bGoToScene_15               : BOOL;
+    nScene_15                   : BYTE;
+    bSetLevel_15                : BOOL;
+    nLevel_15                   : BYTE := 254;
+    nLevelMemoryMode_15         : BYTE := 70;
+    nReferenceDeviceAddress_15  : BYTE;
+    tCycleActualLevel_15        : TIME := T#5S;
+    nOptions_15                 : DWORD := 0;
+    nActualLevel_15             : BYTE;
+
+    // Dimmer 16 variables
+    bRecallMaxLevel_16          : BOOL;
+    bRecallMinLevel_16          : BOOL;
+    //bOn_16                    : BOOL;
+    //bOff_16                   : BOOL;
+    bToggle_16                  : BOOL;
+    bGoToScene_16               : BOOL;
+    nScene_16                   : BYTE;
+    bSetLevel_16                : BOOL;
+    nLevel_16                   : BYTE := 254;
+    nLevelMemoryMode_16         : BYTE := 70;
+    nReferenceDeviceAddress_16  : BYTE;
+    tCycleActualLevel_16        : TIME := T#5S;
+    nOptions_16                 : DWORD := 0;
+    nActualLevel_16             : BYTE;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// ── Dimmer 1 (Address 1) ────────────────────────────────────────────────────
+      <ST><![CDATA[// ── Sync PyADS inputs → dimmer variables ────────────────────────────────────
+bSetLevel               := gvlDALI.aPySetLevel[1];
+nLevel                  := gvlDALI.aPyLevel[1];
+bSetLevel_2             := gvlDALI.aPySetLevel[2];
+nLevel_2                := gvlDALI.aPyLevel[2];
+bSetLevel_3             := gvlDALI.aPySetLevel[3];
+nLevel_3                := gvlDALI.aPyLevel[3];
+bSetLevel_4             := gvlDALI.aPySetLevel[4];
+nLevel_4                := gvlDALI.aPyLevel[4];
+bSetLevel_5             := gvlDALI.aPySetLevel[5];
+nLevel_5                := gvlDALI.aPyLevel[5];
+bSetLevel_6             := gvlDALI.aPySetLevel[6];
+nLevel_6                := gvlDALI.aPyLevel[6];
+bSetLevel_7             := gvlDALI.aPySetLevel[7];
+nLevel_7                := gvlDALI.aPyLevel[7];
+bSetLevel_8             := gvlDALI.aPySetLevel[8];
+nLevel_8                := gvlDALI.aPyLevel[8];
+bSetLevel_9             := gvlDALI.aPySetLevel[9];
+nLevel_9                := gvlDALI.aPyLevel[9];
+bSetLevel_10            := gvlDALI.aPySetLevel[10];
+nLevel_10               := gvlDALI.aPyLevel[10];
+bSetLevel_11            := gvlDALI.aPySetLevel[11];
+nLevel_11               := gvlDALI.aPyLevel[11];
+bSetLevel_12            := gvlDALI.aPySetLevel[12];
+nLevel_12               := gvlDALI.aPyLevel[12];
+bSetLevel_13            := gvlDALI.aPySetLevel[13];
+nLevel_13               := gvlDALI.aPyLevel[13];
+bSetLevel_14            := gvlDALI.aPySetLevel[14];
+nLevel_14               := gvlDALI.aPyLevel[14];
+bSetLevel_15            := gvlDALI.aPySetLevel[15];
+nLevel_15               := gvlDALI.aPyLevel[15];
+bSetLevel_16            := gvlDALI.aPySetLevel[16];
+nLevel_16               := gvlDALI.aPyLevel[16];
+
+// ── Dimmer 1 (Address 1) ─────────────────────────────────────────────────────
 fbDALI102Dimmer1Switch(
     bInitialize                 := bInitialize,
     nAddress                    := 1,
@@ -65,8 +351,9 @@ fbDALI102Dimmer1Switch(
     nOptions                    := nOptions
 );
 nActualLevel                    := fbDALI102Dimmer1Switch.nActualLevel;
+gvlDALI.aPyActualLevel[1] := nActualLevel;
 
-// ── Dimmer 2 (Address 2) ────────────────────────────────────────────────────
+// ── Dimmer 2 (Address 2) ─────────────────────────────────────────────────────
 fbDALI102Dimmer2Switch(
     bInitialize                 := bInitialize,
     nAddress                    := 2,
@@ -86,11 +373,334 @@ fbDALI102Dimmer2Switch(
     tCycleActualLevel           := tCycleActualLevel_2,
     nOptions                    := nOptions_2
 );
-nActualLevel_2                  := fbDALI102Dimmer2Switch.nActualLevel;]]></ST>
+nActualLevel_2                  := fbDALI102Dimmer2Switch.nActualLevel;
+gvlDALI.aPyActualLevel[2] := nActualLevel_2;
+
+// ── Dimmer 3 (Address 3) ─────────────────────────────────────────────────────
+fbDALI102Dimmer3Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 3,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_3,
+    bRecallMinLevel             := bRecallMinLevel_3,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_3,
+    bGoToScene                  := bGoToScene_3,
+    nScene                      := nScene_3,
+    bSetLevel                   := bSetLevel_3,
+    nLevel                      := nLevel_3,
+    nLevelMemoryMode            := nLevelMemoryMode_3,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_3,
+    tCycleActualLevel           := tCycleActualLevel_3,
+    nOptions                    := nOptions_3
+);
+nActualLevel_3                  := fbDALI102Dimmer3Switch.nActualLevel;
+gvlDALI.aPyActualLevel[3] := nActualLevel_3;
+
+// ── Dimmer 4 (Address 4) ─────────────────────────────────────────────────────
+fbDALI102Dimmer4Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 4,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_4,
+    bRecallMinLevel             := bRecallMinLevel_4,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_4,
+    bGoToScene                  := bGoToScene_4,
+    nScene                      := nScene_4,
+    bSetLevel                   := bSetLevel_4,
+    nLevel                      := nLevel_4,
+    nLevelMemoryMode            := nLevelMemoryMode_4,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_4,
+    tCycleActualLevel           := tCycleActualLevel_4,
+    nOptions                    := nOptions_4
+);
+nActualLevel_4                  := fbDALI102Dimmer4Switch.nActualLevel;
+gvlDALI.aPyActualLevel[4] := nActualLevel_4;
+
+// ── Dimmer 5 (Address 5) ─────────────────────────────────────────────────────
+fbDALI102Dimmer5Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 5,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_5,
+    bRecallMinLevel             := bRecallMinLevel_5,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_5,
+    bGoToScene                  := bGoToScene_5,
+    nScene                      := nScene_5,
+    bSetLevel                   := bSetLevel_5,
+    nLevel                      := nLevel_5,
+    nLevelMemoryMode            := nLevelMemoryMode_5,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_5,
+    tCycleActualLevel           := tCycleActualLevel_5,
+    nOptions                    := nOptions_5
+);
+nActualLevel_5                  := fbDALI102Dimmer5Switch.nActualLevel;
+gvlDALI.aPyActualLevel[5] := nActualLevel_5;
+
+// ── Dimmer 6 (Address 6) ─────────────────────────────────────────────────────
+fbDALI102Dimmer6Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 6,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_6,
+    bRecallMinLevel             := bRecallMinLevel_6,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_6,
+    bGoToScene                  := bGoToScene_6,
+    nScene                      := nScene_6,
+    bSetLevel                   := bSetLevel_6,
+    nLevel                      := nLevel_6,
+    nLevelMemoryMode            := nLevelMemoryMode_6,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_6,
+    tCycleActualLevel           := tCycleActualLevel_6,
+    nOptions                    := nOptions_6
+);
+nActualLevel_6                  := fbDALI102Dimmer6Switch.nActualLevel;
+gvlDALI.aPyActualLevel[6] := nActualLevel_6;
+
+// ── Dimmer 7 (Address 7) ─────────────────────────────────────────────────────
+fbDALI102Dimmer7Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 7,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_7,
+    bRecallMinLevel             := bRecallMinLevel_7,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_7,
+    bGoToScene                  := bGoToScene_7,
+    nScene                      := nScene_7,
+    bSetLevel                   := bSetLevel_7,
+    nLevel                      := nLevel_7,
+    nLevelMemoryMode            := nLevelMemoryMode_7,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_7,
+    tCycleActualLevel           := tCycleActualLevel_7,
+    nOptions                    := nOptions_7
+);
+nActualLevel_7                  := fbDALI102Dimmer7Switch.nActualLevel;
+gvlDALI.aPyActualLevel[7] := nActualLevel_7;
+
+// ── Dimmer 8 (Address 8) ─────────────────────────────────────────────────────
+fbDALI102Dimmer8Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 8,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_8,
+    bRecallMinLevel             := bRecallMinLevel_8,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_8,
+    bGoToScene                  := bGoToScene_8,
+    nScene                      := nScene_8,
+    bSetLevel                   := bSetLevel_8,
+    nLevel                      := nLevel_8,
+    nLevelMemoryMode            := nLevelMemoryMode_8,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_8,
+    tCycleActualLevel           := tCycleActualLevel_8,
+    nOptions                    := nOptions_8
+);
+nActualLevel_8                  := fbDALI102Dimmer8Switch.nActualLevel;
+gvlDALI.aPyActualLevel[8] := nActualLevel_8;
+
+// ── Dimmer 9 (Address 9) ─────────────────────────────────────────────────────
+fbDALI102Dimmer9Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 9,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_9,
+    bRecallMinLevel             := bRecallMinLevel_9,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_9,
+    bGoToScene                  := bGoToScene_9,
+    nScene                      := nScene_9,
+    bSetLevel                   := bSetLevel_9,
+    nLevel                      := nLevel_9,
+    nLevelMemoryMode            := nLevelMemoryMode_9,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_9,
+    tCycleActualLevel           := tCycleActualLevel_9,
+    nOptions                    := nOptions_9
+);
+nActualLevel_9                  := fbDALI102Dimmer9Switch.nActualLevel;
+gvlDALI.aPyActualLevel[9] := nActualLevel_9;
+
+// ── Dimmer 10 (Address 10) ───────────────────────────────────────────────────
+fbDALI102Dimmer10Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 10,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_10,
+    bRecallMinLevel             := bRecallMinLevel_10,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_10,
+    bGoToScene                  := bGoToScene_10,
+    nScene                      := nScene_10,
+    bSetLevel                   := bSetLevel_10,
+    nLevel                      := nLevel_10,
+    nLevelMemoryMode            := nLevelMemoryMode_10,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_10,
+    tCycleActualLevel           := tCycleActualLevel_10,
+    nOptions                    := nOptions_10
+);
+nActualLevel_10                 := fbDALI102Dimmer10Switch.nActualLevel;
+gvlDALI.aPyActualLevel[10] := nActualLevel_10;
+
+// ── Dimmer 11 (Address 11) ───────────────────────────────────────────────────
+fbDALI102Dimmer11Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 11,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_11,
+    bRecallMinLevel             := bRecallMinLevel_11,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_11,
+    bGoToScene                  := bGoToScene_11,
+    nScene                      := nScene_11,
+    bSetLevel                   := bSetLevel_11,
+    nLevel                      := nLevel_11,
+    nLevelMemoryMode            := nLevelMemoryMode_11,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_11,
+    tCycleActualLevel           := tCycleActualLevel_11,
+    nOptions                    := nOptions_11
+);
+nActualLevel_11                 := fbDALI102Dimmer11Switch.nActualLevel;
+gvlDALI.aPyActualLevel[11] := nActualLevel_11;
+
+// ── Dimmer 12 (Address 12) ───────────────────────────────────────────────────
+fbDALI102Dimmer12Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 12,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_12,
+    bRecallMinLevel             := bRecallMinLevel_12,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_12,
+    bGoToScene                  := bGoToScene_12,
+    nScene                      := nScene_12,
+    bSetLevel                   := bSetLevel_12,
+    nLevel                      := nLevel_12,
+    nLevelMemoryMode            := nLevelMemoryMode_12,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_12,
+    tCycleActualLevel           := tCycleActualLevel_12,
+    nOptions                    := nOptions_12
+);
+nActualLevel_12                 := fbDALI102Dimmer12Switch.nActualLevel;
+gvlDALI.aPyActualLevel[12] := nActualLevel_12;
+
+// ── Dimmer 13 (Address 13) ───────────────────────────────────────────────────
+fbDALI102Dimmer13Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 13,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_13,
+    bRecallMinLevel             := bRecallMinLevel_13,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_13,
+    bGoToScene                  := bGoToScene_13,
+    nScene                      := nScene_13,
+    bSetLevel                   := bSetLevel_13,
+    nLevel                      := nLevel_13,
+    nLevelMemoryMode            := nLevelMemoryMode_13,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_13,
+    tCycleActualLevel           := tCycleActualLevel_13,
+    nOptions                    := nOptions_13
+);
+nActualLevel_13                 := fbDALI102Dimmer13Switch.nActualLevel;
+gvlDALI.aPyActualLevel[13] := nActualLevel_13;
+
+// ── Dimmer 14 (Address 14) ───────────────────────────────────────────────────
+fbDALI102Dimmer14Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 14,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_14,
+    bRecallMinLevel             := bRecallMinLevel_14,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_14,
+    bGoToScene                  := bGoToScene_14,
+    nScene                      := nScene_14,
+    bSetLevel                   := bSetLevel_14,
+    nLevel                      := nLevel_14,
+    nLevelMemoryMode            := nLevelMemoryMode_14,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_14,
+    tCycleActualLevel           := tCycleActualLevel_14,
+    nOptions                    := nOptions_14
+);
+nActualLevel_14                 := fbDALI102Dimmer14Switch.nActualLevel;
+gvlDALI.aPyActualLevel[14] := nActualLevel_14;
+
+// ── Dimmer 15 (Address 15) ───────────────────────────────────────────────────
+fbDALI102Dimmer15Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 15,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_15,
+    bRecallMinLevel             := bRecallMinLevel_15,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_15,
+    bGoToScene                  := bGoToScene_15,
+    nScene                      := nScene_15,
+    bSetLevel                   := bSetLevel_15,
+    nLevel                      := nLevel_15,
+    nLevelMemoryMode            := nLevelMemoryMode_15,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_15,
+    tCycleActualLevel           := tCycleActualLevel_15,
+    nOptions                    := nOptions_15
+);
+nActualLevel_15                 := fbDALI102Dimmer15Switch.nActualLevel;
+gvlDALI.aPyActualLevel[15] := nActualLevel_15;
+
+// ── Dimmer 16 (Address 16) ───────────────────────────────────────────────────
+fbDALI102Dimmer16Switch(
+    bInitialize                 := bInitialize,
+    nAddress                    := 16,
+    eAddressType                := E_DALIAddressType.Short,
+    bSwitch                     := gvlDALI.gButtonLightOn,
+    bRecallMaxLevel             := bRecallMaxLevel_16,
+    bRecallMinLevel             := bRecallMinLevel_16,
+    bOn                         := ,
+    bOff                        := ,
+    bToggle                     := bToggle_16,
+    bGoToScene                  := bGoToScene_16,
+    nScene                      := nScene_16,
+    bSetLevel                   := bSetLevel_16,
+    nLevel                      := nLevel_16,
+    nLevelMemoryMode            := nLevelMemoryMode_16,
+    nReferenceDeviceAddress     := nReferenceDeviceAddress_16,
+    tCycleActualLevel           := tCycleActualLevel_16,
+    nOptions                    := nOptions_16
+);
+nActualLevel_16                 := fbDALI102Dimmer16Switch.nActualLevel;
+gvlDALI.aPyActualLevel[16] := nActualLevel_16;]]></ST>
     </Implementation>
     <LineIds Name="POU_DALIModule">
-      <LineId Id="86" Count="41" />
-      <LineId Id="5" Count="0" />
+      <LineId Id="819" Count="399" />
+      <LineId Id="169" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

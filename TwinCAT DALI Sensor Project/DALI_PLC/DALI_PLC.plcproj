@@ -37,6 +37,9 @@
     <Compile Include="POUs\POU_DALIModule.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PyADS_POU.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
