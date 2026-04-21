@@ -13,20 +13,18 @@ END_VAR
 // ── DALI: Actual levels → App (readback) ─────────────────────────────────────
 // gvlDALI.aPyActualLevel[1..16] written by POU_DALIModule → read by app
 
-// ── Wall lights: App → Relay ──────────────────────────────────────────────────
-POU_WALLLIGHT.bRelay_1 := gvlDALI.aPyWallRelay[1];
-POU_WALLLIGHT.bRelay_2 := gvlDALI.aPyWallRelay[2];
-POU_WALLLIGHT.bRelay_3 := gvlDALI.aPyWallRelay[3];
-POU_WALLLIGHT.bRelay_4 := gvlDALI.aPyWallRelay[4];
+// ── Wall lights: App → Relay (via GVL, POU_WALLLIGHT reads directly) ─────────
+// gvlDALI.aPyWallRelay[1..4] written by app → read in POU_WALLLIGHT
 
 // ── Wall lights: State → App (readback) ──────────────────────────────────────
-gvlDALI.aPyWallRelayState[1] := POU_WALLLIGHT.bRelay_1;
-gvlDALI.aPyWallRelayState[2] := POU_WALLLIGHT.bRelay_2;
-gvlDALI.aPyWallRelayState[3] := POU_WALLLIGHT.bRelay_3;
-gvlDALI.aPyWallRelayState[4] := POU_WALLLIGHT.bRelay_4;]]></ST>
+gvlDALI.aPyWallRelayState[1] := gvlDALI.aWallRelay[1];
+gvlDALI.aPyWallRelayState[2] := gvlDALI.aWallRelay[2];
+gvlDALI.aPyWallRelayState[3] := gvlDALI.aWallRelay[3];
+gvlDALI.aPyWallRelayState[4] := gvlDALI.aWallRelay[4];]]></ST>
     </Implementation>
     <LineIds Name="PyADS_POU">
-      <LineId Id="26" Count="16" />
+      <LineId Id="26" Count="6" />
+      <LineId Id="43" Count="6" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

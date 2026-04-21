@@ -17,6 +17,8 @@ VAR_GLOBAL
 	     aWallRelay  : ARRAY[1..4] OF BOOL;  // AT %Q*
 	aPyWallRelay    : ARRAY[1..4] OF BOOL;  // from PyADS (app)
 	aPyWallRelayState   : ARRAY[1..4] OF BOOL;  // readback → app
+	// Pushbutton inputs (BTicino L4036, via KL1809)
+    aSwitch     : ARRAY[1..40] OF BOOL AT %I*;  // up to 40 inputs (20 x L4036)
 	
 END_VAR]]></Declaration>
   </GVL>
