@@ -296,7 +296,7 @@ VAR
     nActualLevel_16             : BYTE;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// ── Sync PyADS inputs → dimmer variables ────────────────────────────────────
+      <ST><![CDATA[ // ── Sync PyADS inputs → dimmer variables ────────────────────────────────────
 bSetLevel               := gvlDALI.aPySetLevel[1];
 nLevel                  := gvlDALI.aPyLevel[1];
 bSetLevel_2             := gvlDALI.aPySetLevel[2];
