@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <GVL Name="gvlIO" Id="{c2d3e4f5-a6b7-4890-cdef-123456789abc}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+(*
+  gvlIO — Physical I/O and PyADS interface for all non-DALI devices.
+
+  Naming convention (consistent across ALL apartments so the same Python
+  driver works without changes; only _DEFAULT_* config dicts change):
+
+    AT %I* vars   → auto-mapped to EtherCAT digital input terminals in
+                    declaration order: KL1819 sensors come after KL1809 switches.
+    Output vars   → no AT %Q*; link manually in TwinCAT I/O tree to the
+                    relevant output terminal channels.
+    aPy*Cmd[]     → Python writes these to command the PLC.
+    aPy*State[]   → PLC writes these; Python polls them for readback.
+
+  Standard array sizes for all apartments:
+    Curtain motors : 1..16  (most apartments will use ≤ 8)
+    Door sensors   : 1..16
+    Window sensors : 1..16
+    Motion sensors : 1..8
+    Wall relays    : handled in gvlDALI (see there)
+*)
+VAR_GLOBAL
+
+    // ═══════════════════════════════════════════════════════════════════════
+    //  PHYSICAL INPUTS  (AT %I*)
+    //  Terminal order after KL6821 + KL1809×3 (switches):
+    //    Slots 1-2 → KL1819 × 2 → door sensors aDoorSensor[1..16]
+    //    Slot  3   → KL1819      → window sensors aWindowSensor[1..8]  (8 ch)
+    //    Slot  4   → KL1819      → window sensors aWindowSensor[9..16] + aMotionSensor[1..4]
+    //    Slot  5   → KL1819 / KL1408 → bKeySwitch + spare
+    // ═══════════════════════════════════════════════════════════════════════
+
+    // Door magnetic sensors — TRUE = door open
+    aDoorSensor     : ARRAY[1..16] OF BOOL AT %I*;
+
+    // Window magnetic sensors — TRUE = window open
+    aWindowSensor   : ARRAY[1..16] OF BOOL AT %I*;
+
+    // PIR / motion sensors — TRUE = motion detected
+    aMotionSensor   : ARRAY[1..8] OF BOOL AT %I*;
+
+    // Key-based alarm/lockdown switch — TRUE = armed position
+    bKeySwitch      : BOOL AT %I*;
+
+
+    // ═══════════════════════════════════════════════════════════════════════
+    //  PHYSICAL OUTPUTS  (linked manually in TwinCAT I/O tree)
+    //  Curtain motors: 2 outputs per motor (Up / Down) → KL2xxx relay terms.
+    //  Appliances:     1 output each                   → KL2xxx relay terms.
+    // ═══════════════════════════════════════════════════════════════════════
+
+    // Curtain motor directions (up to 16 motors, 2 signals each)
+    aCurtainUp      : ARRAY[1..16] OF BOOL;   // HIGH = raise
+    aCurtainDown    : ARRAY[1..16] OF BOOL;   // HIGH = lower
+
+    // Appliance power relays
+    bFridgeOut         : BOOL;
+    bCoffeeMachineOut  : BOOL;
+    bMicrowaveOut      : BOOL;
+
+
+    // ═══════════════════════════════════════════════════════════════════════
+    //  PyADS WRITE INTERFACE  — Python writes these to command the PLC
+    // ═══════════════════════════════════════════════════════════════════════
+
+    // Curtain command per motor: 0 = stop, 1 = up, 2 = down
+    aPyCurtainCmd       : ARRAY[1..16] OF BYTE;
+
+    // Physical-button curtain override (written by POU_SWITCHES; 0 = no press)
+    // POU_CURTAINS gives this priority over the app command.
+    aPyCurtainBtnCmd    : ARRAY[1..16] OF BYTE;
+
+    // Appliance on/off commands
+    bPyFridgeCmd        : BOOL;
+    bPyCoffeeMachineCmd : BOOL;
+    bPyMicrowaveCmd     : BOOL;
+
+    // Security commands
+    bPyAlarmArm         : BOOL;   // TRUE = arm alarm from app
+    bPyLockdown         : BOOL;   // TRUE = activate house lockdown from app
+
+
+    // ═══════════════════════════════════════════════════════════════════════
+    //  PyADS READ INTERFACE  — PLC writes these; Python polls them
+    // ═══════════════════════════════════════════════════════════════════════
+
+    // Curtain motion state: 0 = stopped, 1 = moving up, 2 = moving down
+    aPyCurtainState     : ARRAY[1..16] OF BYTE;
+
+    // Appliance actual states
+    bPyFridgeState         : BOOL;
+    bPyCoffeeMachineState  : BOOL;
+    bPyMicrowaveState      : BOOL;
+
+    // Sensor readback (mirrored from physical inputs each PLC cycle)
+    aPyDoorSensor       : ARRAY[1..16] OF BOOL;
+    aPyWindowSensor     : ARRAY[1..16] OF BOOL;
+    aPyMotionSensor     : ARRAY[1..8]  OF BOOL;
+    bPyKeySwitch        : BOOL;
+
+    // Security / alarm state
+    bPyAlarmState       : BOOL;   // TRUE = alarm is currently armed
+    bPyLockdownState    : BOOL;   // TRUE = lockdown is active
+    bPyAlarmTriggered   : BOOL;   // TRUE = intrusion detected while armed
+
+    // Shared lockdown flag — read by POU_DALIModule + POU_WALLLIGHT + POU_CURTAINS
+    bLockdownActive     : BOOL;
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

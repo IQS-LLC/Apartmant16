@@ -1,0 +1,26 @@
+# Production overrides for docker-compose.yml
+version: '3.8'
+
+services:
+  django:
+    environment:
+      - DJANGO_SETTINGS_MODULE=PLC_Project.settings
+      - DEBUG=False
+    env_file:
+      - .env
+    command: sh -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn --config gunicorn.conf.py PLC_Project.wsgi:application"
+
+  nginx:
+    ports:
+      - "80:80"
+      - "443:443"  # For SSL if needed
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_volume:/app/static
+      - media_volume:/app/media
+      # Add SSL certificates here if needed
+      # - ./ssl:/etc/ssl/certs
+
+  db:
+    env_file:
+      - .env

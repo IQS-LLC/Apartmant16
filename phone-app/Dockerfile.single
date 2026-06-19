@@ -1,0 +1,83 @@
+# Single-container production deployment
+FROM ubuntu:22.04
+
+# Prevent interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3.11-venv \
+    python3-pip \
+    postgresql \
+    postgresql-contrib \
+    nginx \
+    supervisor \
+    curl \
+    git \
+    build-essential \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create app user
+RUN useradd --create-home --shell /bin/bash app
+
+# Set up application directory
+WORKDIR /app
+RUN chown app:app /app
+
+# Copy and install Python dependencies
+USER app
+COPY requirements.txt .
+RUN python3 -m venv /app/venv && \
+    /app/venv/bin/pip install --upgrade pip && \
+    /app/venv/bin/pip install -r requirements.txt
+
+# Copy application code
+USER root
+COPY . /app/
+RUN chown -R app:app /app
+
+# Set up Nginx
+COPY nginx/nginx.conf /etc/nginx/sites-available/plc_app
+RUN ln -s /etc/nginx/sites-available/plc_app /etc/nginx/sites-enabled/ && \
+    rm /etc/nginx/sites-enabled/default
+
+# Set up supervisord
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Create necessary directories
+RUN mkdir -p /app/static /app/media /var/log/supervisor /var/run/supervisor && \
+    chown -R app:app /app/static /app/media
+
+# Copy startup script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Set environment variables
+# For secure deployment, override these vars at runtime or via docker-compose env_file.
+# Example: docker run -e SECRET_KEY=xxxx -e ALLOWED_HOSTS=yourdomain.com
+ENV DJANGO_SETTINGS_MODULE=PLC_Project.settings
+ENV SECRET_KEY=django-insecure-auto-generated-key-change-in-production
+ENV DEBUG=False
+ENV DB_ENGINE=django.db.backends.postgresql
+ENV DB_NAME=plc_db
+ENV DB_USER=plc_user
+ENV DB_PASSWORD=plc_password
+ENV DB_HOST=localhost
+ENV DB_PORT=5432
+ENV ALLOWED_HOSTS=*
+
+# Add new environment-based settings here (logging path, feature flags, etc.)
+# Example: ENV FEATURE_FAKEPLC=true
+
+
+# Expose ports
+EXPOSE 80
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost/health/ || exit 1
+
+# Start all services
+CMD ["/start.sh"]

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="PyADS_POU" Id="{54d07951-3b08-4405-80a5-226f71580db2}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+  PyADS_POU — Mirrors PLC outputs back to the PyADS read-interface variables.
+
+  This POU is the "readback" layer: it copies physically-driven outputs into
+  the aPy*State variables that Python reads via ADS.
+  All actual sensor readbacks (door/window/motion) and security state are
+  handled directly in POU_SECURITY; this POU covers DALI + relay + curtain
+  + appliance where the "state" is derived from the output variable itself.
+*)
+PROGRAM PyADS_POU
+VAR
+    i : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ── Wall relay readback ───────────────────────────────────────────────────────
+// Copy physical relay output (after lockdown override) back to Python readback.
+FOR i := 1 TO 16 DO
+    gvlDALI.aPyWallRelayState[i] := gvlDALI.aWallRelay[i];
+END_FOR
+
+// ── Switch state readback ─────────────────────────────────────────────────────
+// Also done in POU_SWITCHES; kept here as belt-and-suspenders.
+FOR i := 1 TO 48 DO
+    gvlDALI.aPySwitchState[i] := gvlDALI.aSwitch[i];
+END_FOR
+
+// ── Curtain state readback ────────────────────────────────────────────────────
+// aPyCurtainState[] is written by POU_CURTAINS — no duplication needed here.
+
+// ── Appliance state readback ──────────────────────────────────────────────────
+// bPy*State written by POU_APPLIANCES — no duplication needed here.
+
+// ── Security / sensor readback ────────────────────────────────────────────────
+// aPyDoorSensor[], aPyWindowSensor[], aPyMotionSensor[], bPyAlarmState, etc.
+// are all written by POU_SECURITY — no duplication needed here.
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

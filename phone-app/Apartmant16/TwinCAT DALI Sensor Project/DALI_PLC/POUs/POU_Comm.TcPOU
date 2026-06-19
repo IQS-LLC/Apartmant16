@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="POU_Comm" Id="{9e16c0a0-b9e5-4fb1-89d7-ea6f2a13cb89}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM POU_Comm
+VAR
+    fbKL6821Communication   : FB_KL6821Communication;
+    bInitialise             : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Program body
+fbKL6821Communication(
+    bResetMaximumDemandCounter  := FALSE,
+    bResetOverflowCounter       := FALSE,
+    nOptions                    := 0,
+    bResetInactiveProcessImage  := FALSE,
+    bInitialise                 := bInitialise,
+    eCommandKBusWatchdog        := ,
+    eCommandDI1RisingEdge       := ,
+    eCommandDI1FallingEdge      := ,
+    eCommandDI2RisingEdge       := ,
+    eCommandDI2FallingEdge      := ,
+    bDoNotLockProcessImage      := FALSE,
+    bDisableInternalPowerSupply := FALSE,
+    stInData                    := gvlDALI.stKL6821InData,
+    stOutData                   := gvlDALI.stKL6821OutData
+);]]></ST>
+    </Implementation>
+    <LineIds Name="POU_Comm">
+      <LineId Id="10" Count="15" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

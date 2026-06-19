@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="POU_APPLIANCES" Id="{f3a4b5c6-d7e8-9012-fabc-456789012def}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+  POU_APPLIANCES — Smart appliance relay control.
+
+  Devices: fridge, coffee machine, microwave (expandable).
+  Python writes bPy*Cmd; PLC drives physical relay output; state is mirrored
+  back to bPy*State for Python readback.
+
+  During lockdown the coffee machine and microwave are forced off (fridge
+  stays on to protect food).
+
+  Physical output variables (bFridgeOut, etc.) are regular variables that
+  must be linked to relay output terminals in the TwinCAT I/O tree.
+*)
+PROGRAM POU_APPLIANCES
+VAR
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ── Drive relay outputs ──────────────────────────────────────────────────────
+IF gvlIO.bLockdownActive THEN
+    // Lockdown: keep fridge running, turn off heat-producing appliances
+    gvlIO.bFridgeOut        := gvlIO.bPyFridgeCmd;    // fridge stays as-is
+    gvlIO.bCoffeeMachineOut := FALSE;
+    gvlIO.bMicrowaveOut     := FALSE;
+ELSE
+    gvlIO.bFridgeOut        := gvlIO.bPyFridgeCmd;
+    gvlIO.bCoffeeMachineOut := gvlIO.bPyCoffeeMachineCmd;
+    gvlIO.bMicrowaveOut     := gvlIO.bPyMicrowaveCmd;
+END_IF
+
+// ── Readback → Python ────────────────────────────────────────────────────────
+gvlIO.bPyFridgeState        := gvlIO.bFridgeOut;
+gvlIO.bPyCoffeeMachineState := gvlIO.bCoffeeMachineOut;
+gvlIO.bPyMicrowaveState     := gvlIO.bMicrowaveOut;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

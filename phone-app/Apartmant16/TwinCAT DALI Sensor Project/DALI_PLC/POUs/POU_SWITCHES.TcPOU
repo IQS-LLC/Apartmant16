@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="POU_SWITCHES" Id="{d1e2f3a4-b5c6-7890-defa-234567890bcd}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+  POU_SWITCHES — BTicino L4036 push-button logic.
+
+  Physical button mapping for Apartment 16
+  ─────────────────────────────────────────
+  Switches 1-6   → DALI room toggles  (bSwitch input on each FB_DALI102Dimmer*,
+                   assigned directly in POU_DALIModule — no extra logic here)
+
+  Switches 7-11  → Wall relay toggles  (edge-triggered: press = flip relay state)
+    SW 7  → Wall Light 1  (aPyWallRelay[1])
+    SW 8  → Wall Light 2  (aPyWallRelay[2])
+    SW 9  → Wall Light 3  (aPyWallRelay[3])
+    SW 10 → Wall Light 4  (aPyWallRelay[4])
+    SW 11 → Wall Light 5  (aPyWallRelay[5])
+
+  Switches 12-43 → Curtain hold-to-run  (level: hold = run, release = stop)
+    SW 12/13 → Curtain 1 Up/Down
+    SW 14/15 → Curtain 2 Up/Down
+    SW 16/17 → Curtain 3 Up/Down
+    SW 18/19 → Curtain 4 Up/Down
+    SW 20/21 → Curtain 5 Up/Down
+    SW 22/23 → Curtain 6 Up/Down
+    SW 24/25 → Curtain 7 Up/Down
+    SW 26/27 → Curtain 8 Up/Down
+
+  Switches 28-48 → spare / future use
+
+  Button commands for curtains are written to gvlIO.aPyCurtainBtnCmd[].
+  POU_CURTAINS gives these priority over the app command.
+
+  Switch states are mirrored to gvlDALI.aPySwitchState[] every cycle so
+  Python can display the live button state in the app.
+*)
+PROGRAM POU_SWITCHES
+VAR
+    // Rising-edge detectors for wall relay toggles (one per relay, 1-indexed)
+    artRelay    : ARRAY[1..16] OF R_TRIG;
+    i           : INT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ── Mirror all switch states → Python readback ──────────────────────────────
+FOR i := 1 TO 48 DO
+    gvlDALI.aPySwitchState[i] := gvlDALI.aSwitch[i];
+END_FOR
+
+// ── Wall relay toggles (switches 7-11 → relays 1-5) ─────────────────────────
+// artRelay[1] watches aSwitch[7], artRelay[2] watches aSwitch[8], etc.
+FOR i := 1 TO 5 DO
+    artRelay[i](CLK := gvlDALI.aSwitch[6 + i]);
+    IF artRelay[i].Q THEN
+        gvlDALI.aPyWallRelay[i] := NOT gvlDALI.aPyWallRelay[i];
+    END_IF
+END_FOR
+
+// ── Curtain hold-to-run (switches 12-27 → motors 1-8) ───────────────────────
+// Up   = switch 10 + (motor * 2)    → 12, 14, 16, 18, 20, 22, 24, 26
+// Down = switch 10 + (motor * 2) + 1 → 13, 15, 17, 19, 21, 23, 25, 27
+// A held button writes a non-zero cmd; releasing writes 0 (stop).
+// POU_CURTAINS combines this with the app command.
+FOR i := 1 TO 8 DO
+    IF gvlDALI.aSwitch[10 + (i * 2)] THEN
+        gvlIO.aPyCurtainBtnCmd[i] := 1;     // up
+    ELSIF gvlDALI.aSwitch[10 + (i * 2) + 1] THEN
+        gvlIO.aPyCurtainBtnCmd[i] := 2;     // down
+    ELSE
+        gvlIO.aPyCurtainBtnCmd[i] := 0;     // no button pressed
+    END_IF
+END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

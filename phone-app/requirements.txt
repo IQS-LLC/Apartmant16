@@ -1,0 +1,42 @@
+# ASGI support compatible with Django 5.x on Python 3.11
+asgiref==3.11.1
+
+# Django compatible with Python 3.11
+Django==5.2.12
+
+# Django REST Framework
+djangorestframework==3.16.0
+
+# JWT authentication
+djangorestframework-simplejwt==5.5.0
+
+# CORS handling
+django-cors-headers==4.9.0
+
+# System utilities
+psutil==7.2.2
+
+# PLC / Automation libraries
+pyads==3.5.2
+pysoem==1.1.13
+
+# Networking / packet analysis
+scapy==2.7.0
+
+# SQL parsing
+sqlparse==0.5.5
+
+# Timezone database
+tzdata==2025.3
+
+# Production WSGI server
+gunicorn==21.2.0
+
+# PostgreSQL driver
+psycopg>=3.1,<4.0
+
+# Static files
+whitenoise==6.6.0
+
+# JWT token decoding (used by simplejwt)
+PyJWT>=2.8.0,<3.0

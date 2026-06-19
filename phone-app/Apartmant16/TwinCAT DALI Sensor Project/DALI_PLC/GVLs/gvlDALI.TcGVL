@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <GVL Name="gvlDALI" Id="{ab3b6ad3-2b9d-4e07-901d-5f8aa5a92bd9}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+(*
+  gvlDALI — DALI dimmer bus, wall relay lights, and BTicino switch inputs.
+
+  Standard array sizes (consistent across ALL apartments):
+    DALI channels  : 1..16
+    Wall relays    : 1..16  (physical links only wired for channels in use)
+    Switch inputs  : 1..48  (3 × KL1809 16-channel terminals)
+*)
+VAR_GLOBAL
+
+    // ── KL6821 DALI master terminal ──────────────────────────────────────────
+    stKL6821InData      AT %I* : ST_KL6821InData;
+    stKL6821OutData     AT %Q* : ST_KL6821OutData;
+
+    // ── DALI dimmer levels (16 channels) ─────────────────────────────────────
+    // Python writes aPyLevel[N] + rising edge on aPySetLevel[N] to dim.
+    // PLC writes aPyActualLevel[N] as confirmed readback.
+    aPyLevel            : ARRAY[1..16] OF BYTE;   // 0-254, desired level
+    aPySetLevel         : ARRAY[1..16] OF BOOL;   // rising edge commits level
+    aPyActualLevel      : ARRAY[1..16] OF BYTE;   // actual level → Python
+
+    // ── Wall relay lights ────────────────────────────────────────────────────
+    // aWallRelay[] are regular variables linked to relay output terminals in
+    // the TwinCAT I/O tree (not AT %Q* auto-mapped).
+    // Array sized to 16 so the same driver works for all apartments.
+    aWallRelay          : ARRAY[1..16] OF BOOL;   // physical relay outputs (linked)
+    aPyWallRelay        : ARRAY[1..16] OF BOOL;   // Python → PLC command
+    aPyWallRelayState   : ARRAY[1..16] OF BOOL;   // PLC → Python readback
+
+    // ── BTicino L4036 push-button inputs (KL1809 × 3 = 48 channels) ─────────
+    aSwitch             : ARRAY[1..48] OF BOOL AT %I*;
+    aPySwitchState      : ARRAY[1..48] OF BOOL;   // mirrored → Python readback
+
+    // ── Legacy single-switch placeholder (kept for backwards compat) ─────────
+    bSwitchOn           AT %I* : BOOL;
+    gLightOn            : BOOL;
+    gButtonLightOn      AT %I* : BOOL;
+    gMotionLightOn      AT %I* : BOOL;
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

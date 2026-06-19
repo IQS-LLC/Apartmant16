@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="POU_SECURITY" Id="{a4b5c6d7-e8f9-0123-abcd-567890123efa}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+  POU_SECURITY — Alarm, lockdown, and sensor management.
+
+  Alarm arming:
+    Arm sources  : physical key switch (bKeySwitch) OR app command (bPyAlarmArm).
+    Disarm       : both sources must be FALSE to disarm.
+    Trigger      : any door/window open, or motion detected, while armed.
+    Clear trigger: disarming automatically clears the triggered state.
+
+  Lockdown mode:
+    Activated by bPyLockdown (app command).
+    Sets gvlIO.bLockdownActive which is read by:
+      POU_WALLLIGHT  → forces all relay lights off
+      POU_CURTAINS   → forces all curtains down (closed)
+      POU_APPLIANCES → turns off heat appliances
+      POU_DALIModule → fires DALI Off command once on activation
+
+  Sensor readback:
+    Physical inputs are mirrored to aPy* vars every PLC cycle so Python
+    can display live states in the app without extra ADS reads.
+*)
+PROGRAM POU_SECURITY
+VAR
+    bAlarmArmed         : BOOL;
+    bAlarmTriggered     : BOOL;
+    bAnyIntrusion       : BOOL;
+    i                   : INT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ── Sensor readback → Python ─────────────────────────────────────────────────
+FOR i := 1 TO 16 DO
+    gvlIO.aPyDoorSensor[i]   := gvlIO.aDoorSensor[i];
+    gvlIO.aPyWindowSensor[i] := gvlIO.aWindowSensor[i];
+END_FOR
+FOR i := 1 TO 8 DO
+    gvlIO.aPyMotionSensor[i] := gvlIO.aMotionSensor[i];
+END_FOR
+gvlIO.bPyKeySwitch := gvlIO.bKeySwitch;
+
+// ── Alarm arm state ──────────────────────────────────────────────────────────
+// Key switch (physical) OR app command arms the alarm.
+// Both must be FALSE to disarm.
+bAlarmArmed := gvlIO.bKeySwitch OR gvlIO.bPyAlarmArm;
+
+// ── Intrusion detection ──────────────────────────────────────────────────────
+bAnyIntrusion := FALSE;
+IF bAlarmArmed THEN
+    FOR i := 1 TO 16 DO
+        IF gvlIO.aDoorSensor[i]   THEN bAnyIntrusion := TRUE; END_IF
+        IF gvlIO.aWindowSensor[i] THEN bAnyIntrusion := TRUE; END_IF
+    END_FOR
+    FOR i := 1 TO 8 DO
+        IF gvlIO.aMotionSensor[i] THEN bAnyIntrusion := TRUE; END_IF
+    END_FOR
+END_IF
+
+// Latch trigger; clear only on disarm
+IF bAnyIntrusion AND NOT bAlarmTriggered THEN
+    bAlarmTriggered := TRUE;
+END_IF
+IF NOT bAlarmArmed THEN
+    bAlarmTriggered := FALSE;
+END_IF
+
+// ── Lockdown activation ──────────────────────────────────────────────────────
+// bLockdownActive is the shared flag consumed by all other POUs.
+gvlIO.bLockdownActive := gvlIO.bPyLockdown;
+
+// ── Security state readback → Python ────────────────────────────────────────
+gvlIO.bPyAlarmState     := bAlarmArmed;
+gvlIO.bPyAlarmTriggered := bAlarmTriggered;
+gvlIO.bPyLockdownState  := gvlIO.bLockdownActive;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

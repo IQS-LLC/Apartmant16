@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="MAIN" Id="{7d680b2f-8db9-4f1e-8602-1c7527d7b88c}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+  MAIN — Task entry point.  Execution order matters:
+
+    1. POU_SECURITY   — evaluate sensors + set bLockdownActive first so all
+                        other POUs can read the flag in the same cycle.
+    2. POU_SWITCHES   — edge-detect BTicino buttons; write relay toggles and
+                        curtain button commands.
+    3. POU_DALIModule — drive 16 DALI dimmers (reads bLockdownActive).
+    4. POU_WALLLIGHT  — drive relay lights (reads bLockdownActive).
+    5. POU_CURTAINS   — drive curtain motors (reads bLockdownActive + btn cmds).
+    6. POU_APPLIANCES — drive appliance relays (reads bLockdownActive).
+    7. PyADS_POU      — mirror outputs → Python readback variables.
+*)
+PROGRAM MAIN
+VAR
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[POU_SECURITY();     // 1 — sensors + lockdown flag
+POU_SWITCHES();     // 2 — BTicino button logic
+POU_DALIModule();   // 3 — DALI dimmers
+POU_WALLLIGHT();    // 4 — relay wall lights
+POU_CURTAINS();     // 5 — curtain motors
+POU_APPLIANCES();   // 6 — smart appliances
+PyADS_POU();        // 7 — readback mirror]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

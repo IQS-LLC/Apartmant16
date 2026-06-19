@@ -1,0 +1,36 @@
+# Fastlane configuration for Android
+default_platform(:android)
+
+platform :android do
+  desc "Build and deploy Android APK"
+  lane :build_and_deploy do
+    # Build the APK
+    gradle(
+      task: "assemble",
+      build_type: "Release",
+      project_dir: "../"
+    )
+
+    # Upload to Google Play (if configured)
+    # upload_to_play_store(
+    #   track: "internal",
+    #   apk: "../build/app/outputs/flutter-apk/app-release.apk"
+    # )
+
+    # Or distribute via Firebase App Distribution
+    # firebase_app_distribution(
+    #   app: "your-firebase-app-id",
+    #   apk_path: "../build/app/outputs/flutter-apk/app-release.apk",
+    #   groups: "testers"
+    # )
+  end
+
+  desc "Build debug APK"
+  lane :build_debug do
+    gradle(
+      task: "assemble",
+      build_type: "Debug",
+      project_dir: "../"
+    )
+  end
+end

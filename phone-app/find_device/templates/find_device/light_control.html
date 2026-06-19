@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Light Control</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f0f1a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 32px;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .card {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 28px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+        }
+
+        .card h2 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* Big brightness display */
+        #value {
+            font-size: 72px;
+            font-weight: bold;
+            text-align: center;
+            margin: 8px 0 20px;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        /* Slider */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #2a2a4a;
+            outline: none;
+            cursor: pointer;
+            margin-bottom: 24px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #e94560;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(233,69,96,0.6);
+        }
+
+        /* ON/OFF buttons */
+        .main-btns {
+            display: flex;
+            gap: 12px;
+        }
+        .main-btns button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        .main-btns button:active { transform: scale(0.97); }
+        .btn-on  { background: #e94560; color: white; }
+        .btn-off { background: #2a2a4a; color: #aaa; }
+
+        /* Scene presets */
+        .scenes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .scene-btn {
+            background: #2a2a4a;
+            color: #ccc;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .scene-btn:hover  { background: #3a3a6a; }
+        .scene-btn:active { transform: scale(0.96); }
+
+        /* Fade time */
+        .fade-btns {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .fade-btn {
+            background: #2a2a4a;
+            color: #aaa;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .fade-btn.active {
+            border-color: #e94560;
+            color: #fff;
+            background: #3a1a2a;
+        }
+
+        /* Status panel */
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .status-item {
+            background: #12122a;
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .status-item .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+        .status-item .val {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .green { color: #4caf50; }
+        .red   { color: #e94560; }
+        .grey  { color: #555; }
+
+        /* Error banner */
+        #error-banner {
+            display: none;
+            background: #e94560;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-weight: bold;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>💡 Light Control</h1>
+
+    <div id="error-banner">⚠️ Light Error Detected!</div>
+
+    <!-- Main brightness card -->
+    <div class="card">
+        <h2>Brightness</h2>
+        <div id="value">100%</div>
+        <input type="range" id="slider" min="0" max="100" value="255">
+        <div class="main-btns">
+            <button class="btn-on"  onclick="send(100)">ON</button>
+            <button class="btn-off" onclick="send(0)">OFF</button>
+        </div>
+    </div>
+
+    <!-- Scene presets -->
+    <div class="card">
+        <h2>Scenes</h2>
+        <div class="scenes">
+            <button class="scene-btn" onclick="send(25)">25%<br>🌑 Dim</button>
+            <button class="scene-btn" onclick="send(50)">50%<br>🌗 Half</button>
+            <button class="scene-btn" onclick="send(75)">75%<br>🌕 Bright</button>
+            <button class="scene-btn" onclick="send(100)">100%<br>☀️ Full</button>
+        </div>
+    </div>
+
+    <!-- Fade time -->
+    <div class="card">
+        <h2>Fade Time</h2>
+        <div class="fade-btns">
+            <button class="fade-btn" onclick="setFade('700ms')">0.7s</button>
+            <button class="fade-btn active" onclick="setFade('2000ms')">2s</button>
+            <button class="fade-btn" onclick="setFade('4000ms')">4s</button>
+            <button class="fade-btn" onclick="setFade('8000ms')">8s</button>
+        </div>
+    </div>
+
+    <!-- Status -->
+    <div class="card">
+        <h2>Status</h2>
+        <div class="status-grid">
+            <div class="status-item">
+                <span class="label">Actual Level</span>
+                <span class="val" id="actual-level">—</span>
+            </div>
+            <div class="status-item">
+                <span class="label">System</span>
+                <span class="val" id="system-ready">—</span>
+            </div>
+            <div class="status-item">
+                <span class="label">Button 1</span>
+                <span class="val" id="btn1">—</span>
+            </div>
+            <div class="status-item">
+                <span class="label">Button 2</span>
+                <span class="val" id="btn2">—</span>
+            </div>
+        </div>
+    </div>
+
+    {% csrf_token %}
+
+    <script>
+        const slider = document.getElementById('slider')
+        const label  = document.getElementById('value')
+        let   timer  = null
+
+        function getCookie(name) {
+            const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)')
+            return v ? v[2] : null
+        }
+
+        function send(val) {
+            val = parseInt(val)
+            slider.value    = val
+            label.innerText = val + '%'
+            label.style.color = val === 0 ? '#444' : val < 30 ? '#e9a020' : '#fff'
+            fetch('/plc/brightness/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: 'brightness=' + val
+            })
+        }
+
+        slider.addEventListener('input', () => {
+            label.innerText = slider.value + '%'
+            label.style.color = slider.value == 0 ? '#444' : slider.value < 30 ? '#e9a020' : '#fff'
+            clearTimeout(timer)
+            timer = setTimeout(() => send(slider.value), 200)
+        })
+
+        function setFade(fade) {
+            document.querySelectorAll('.fade-btn').forEach(b => b.classList.remove('active'))
+            event.target.classList.add('active')
+            fetch('/plc/fade/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: 'fade=' + fade
+            })
+        }
+
+        // Poll status every 2 seconds
+        function refreshState() {
+            fetch('/plc/state/')
+                .then(r => r.json())
+                .then(d => {
+                    if (d.error) return
+
+                    document.getElementById('actual-level').innerText = d.actual_percent + '%'
+
+                    const ready = document.getElementById('system-ready')
+                    ready.innerText   = d.system_ready ? 'Ready' : 'Not Ready'
+                    ready.className   = 'val ' + (d.system_ready ? 'green' : 'red')
+
+                    const b1 = document.getElementById('btn1')
+                    b1.innerText  = d.button1 ? 'PRESSED' : 'idle'
+                    b1.className  = 'val ' + (d.button1 ? 'green' : 'grey')
+
+                    const b2 = document.getElementById('btn2')
+                    b2.innerText  = d.button2 ? 'PRESSED' : 'idle'
+                    b2.className  = 'val ' + (d.button2 ? 'green' : 'grey')
+
+                    // Error banner
+                    const banner = document.getElementById('error-banner')
+                    banner.style.display = d.light_error ? 'block' : 'none'
+                })
+                .catch(() => {})
+        }
+
+        refreshState()
+        setInterval(refreshState, 2000)
+    </script>
+</body>
+</html>

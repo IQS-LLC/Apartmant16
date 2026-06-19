@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="POU_WALLLIGHT" Id="{840098ec-0897-43ea-8320-196cc3c37fca}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+  POU_WALLLIGHT — Wall relay light control.
+
+  Reads Python commands from gvlDALI.aPyWallRelay[] and drives
+  gvlDALI.aWallRelay[] (linked to physical relay output terminals).
+
+  Lockdown override: when gvlIO.bLockdownActive is TRUE all relays are
+  forced off regardless of the app command.
+
+  Array[1..16] covers all apartments; only wired channels have
+  a physical relay linked in the I/O tree, so unused indices are harmless.
+*)
+PROGRAM POU_WALLLIGHT
+VAR
+    i : INT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ── Drive physical relay outputs ────────────────────────────────────────────
+FOR i := 1 TO 16 DO
+    IF gvlIO.bLockdownActive THEN
+        // Lockdown: force all wall lights off
+        gvlDALI.aWallRelay[i] := FALSE;
+    ELSE
+        // Normal: follow app command
+        gvlDALI.aWallRelay[i] := gvlDALI.aPyWallRelay[i];
+    END_IF
+END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

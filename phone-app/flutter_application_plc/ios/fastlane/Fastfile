@@ -1,0 +1,39 @@
+# Fastlane configuration for iOS
+default_platform(:ios)
+
+platform :ios do
+  desc "Build and deploy iOS app"
+  lane :build_and_deploy do
+    # Build the app
+    build_app(
+      scheme: "Runner",
+      export_method: "development",
+      output_directory: "./build",
+      output_name: "PLC_App"
+    )
+
+    # Upload to TestFlight
+    # upload_to_testflight(
+    #   api_key_path: "fastlane/api_key.json",
+    #   distribute_external: true,
+    #   groups: ["External Testers"]
+    # )
+
+    # Or distribute via Firebase App Distribution
+    # firebase_app_distribution(
+    #   app: "your-firebase-app-id",
+    #   ipa_path: "./build/PLC_App.ipa",
+    #   groups: "testers"
+    # )
+  end
+
+  desc "Build debug iOS app"
+  lane :build_debug do
+    build_app(
+      scheme: "Runner",
+      configuration: "Debug",
+      output_directory: "./build",
+      output_name: "PLC_App_Debug"
+    )
+  end
+end

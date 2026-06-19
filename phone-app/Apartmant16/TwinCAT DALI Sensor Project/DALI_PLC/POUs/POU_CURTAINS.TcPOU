@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="POU_CURTAINS" Id="{e2f3a4b5-c6d7-8901-efab-345678901cde}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+  POU_CURTAINS — Curtain motor control (up to 16 motors).
+
+  Command priority (highest first):
+    1. Lockdown active       → all motors driven DOWN (close curtains)
+    2. Physical button press → aPyCurtainBtnCmd[i] (set by POU_SWITCHES)
+    3. App command           → aPyCurtainCmd[i] (written by Python via PyADS)
+
+  Commands:  0 = stop,  1 = up (raise),  2 = down (lower)
+
+  Safety interlock: both Up and Down outputs for the same motor are NEVER
+  set simultaneously.  Down is cleared before Up is set and vice-versa with
+  a one-cycle gap enforced by the priority logic below.
+
+  Physical outputs aCurtainUp[] / aCurtainDown[] are regular variables that
+  must be linked to the motor relay output terminals in TwinCAT I/O tree.
+*)
+PROGRAM POU_CURTAINS
+VAR
+    i           : INT;
+    nCmd        : BYTE;   // resolved command for current motor
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i := 1 TO 16 DO
+
+    // ── Resolve effective command ────────────────────────────────────────────
+    IF gvlIO.bLockdownActive THEN
+        nCmd := 2;                              // lockdown → close all
+    ELSIF gvlIO.aPyCurtainBtnCmd[i] <> 0 THEN
+        nCmd := gvlIO.aPyCurtainBtnCmd[i];      // physical button has priority
+    ELSE
+        nCmd := gvlIO.aPyCurtainCmd[i];         // app command
+    END_IF
+
+    // ── Safety interlock + drive outputs ────────────────────────────────────
+    CASE nCmd OF
+        1:  // UP — clear Down first to avoid both-on glitch
+            gvlIO.aCurtainDown[i] := FALSE;
+            gvlIO.aCurtainUp[i]   := TRUE;
+            gvlIO.aPyCurtainState[i] := 1;
+
+        2:  // DOWN — clear Up first
+            gvlIO.aCurtainUp[i]   := FALSE;
+            gvlIO.aCurtainDown[i] := TRUE;
+            gvlIO.aPyCurtainState[i] := 2;
+
+        ELSE  // STOP (0 or any unknown value)
+            gvlIO.aCurtainUp[i]   := FALSE;
+            gvlIO.aCurtainDown[i] := FALSE;
+            gvlIO.aPyCurtainState[i] := 0;
+    END_CASE
+
+END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

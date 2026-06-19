@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="POU_DALIModule" Id="{094157ad-d07e-40ab-81bc-9862c0e30825}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+  POU_DALIModule — 16 Tridonic DALI ballasts via KL6821.
+
+  Physical button mapping (aSwitch index per room):
+    SW 1 → Living Room  (ch 1-4)
+    SW 2 → Dining Room  (ch 5-8)
+    SW 3 → Bedroom 1    (ch 9-10)
+    SW 4 → Bedroom 2    (ch 11-12)
+    SW 5 → Kitchen      (ch 13-14)
+    SW 6 → Hallway      (ch 15-16)
+
+  Lockdown: bOff := gvlIO.bLockdownActive on every FB call.
+  Beckhoff's FB_DALI102Dimmer1Switch detects the rising edge internally,
+  so setting bOff to TRUE fires a single DALI "Off" command (no bus spam).
+*)
+PROGRAM POU_DALIModule
+VAR
+    fbDALI102Dimmer1Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer2Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer3Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer4Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer5Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer6Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer7Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer8Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer9Switch      : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer10Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer11Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer12Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer13Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer14Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer15Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+    fbDALI102Dimmer16Switch     : FB_DALI102Dimmer1Switch(POU_Comm.fbKL6821Communication);
+
+    bInitialize                 : BOOL := FALSE;
+
+    // Per-dimmer local variables (level, setlevel trigger, actual readback)
+    bSetLevel_1   : BOOL;  nLevel_1   : BYTE := 254;  nActualLevel_1   : BYTE;
+    bSetLevel_2   : BOOL;  nLevel_2   : BYTE := 254;  nActualLevel_2   : BYTE;
+    bSetLevel_3   : BOOL;  nLevel_3   : BYTE := 254;  nActualLevel_3   : BYTE;
+    bSetLevel_4   : BOOL;  nLevel_4   : BYTE := 254;  nActualLevel_4   : BYTE;
+    bSetLevel_5   : BOOL;  nLevel_5   : BYTE := 254;  nActualLevel_5   : BYTE;
+    bSetLevel_6   : BOOL;  nLevel_6   : BYTE := 254;  nActualLevel_6   : BYTE;
+    bSetLevel_7   : BOOL;  nLevel_7   : BYTE := 254;  nActualLevel_7   : BYTE;
+    bSetLevel_8   : BOOL;  nLevel_8   : BYTE := 254;  nActualLevel_8   : BYTE;
+    bSetLevel_9   : BOOL;  nLevel_9   : BYTE := 254;  nActualLevel_9   : BYTE;
+    bSetLevel_10  : BOOL;  nLevel_10  : BYTE := 254;  nActualLevel_10  : BYTE;
+    bSetLevel_11  : BOOL;  nLevel_11  : BYTE := 254;  nActualLevel_11  : BYTE;
+    bSetLevel_12  : BOOL;  nLevel_12  : BYTE := 254;  nActualLevel_12  : BYTE;
+    bSetLevel_13  : BOOL;  nLevel_13  : BYTE := 254;  nActualLevel_13  : BYTE;
+    bSetLevel_14  : BOOL;  nLevel_14  : BYTE := 254;  nActualLevel_14  : BYTE;
+    bSetLevel_15  : BOOL;  nLevel_15  : BYTE := 254;  nActualLevel_15  : BYTE;
+    bSetLevel_16  : BOOL;  nLevel_16  : BYTE := 254;  nActualLevel_16  : BYTE;
+
+    // Common options (shared across all dimmers)
+    nLevelMemoryMode    : BYTE  := 70;
+    tCycleActualLevel   : TIME  := T#5S;
+    nOptions            : DWORD := 0;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ── Sync PyADS inputs → per-dimmer variables ────────────────────────────────
+bSetLevel_1  := gvlDALI.aPySetLevel[1];   nLevel_1  := gvlDALI.aPyLevel[1];
+bSetLevel_2  := gvlDALI.aPySetLevel[2];   nLevel_2  := gvlDALI.aPyLevel[2];
+bSetLevel_3  := gvlDALI.aPySetLevel[3];   nLevel_3  := gvlDALI.aPyLevel[3];
+bSetLevel_4  := gvlDALI.aPySetLevel[4];   nLevel_4  := gvlDALI.aPyLevel[4];
+bSetLevel_5  := gvlDALI.aPySetLevel[5];   nLevel_5  := gvlDALI.aPyLevel[5];
+bSetLevel_6  := gvlDALI.aPySetLevel[6];   nLevel_6  := gvlDALI.aPyLevel[6];
+bSetLevel_7  := gvlDALI.aPySetLevel[7];   nLevel_7  := gvlDALI.aPyLevel[7];
+bSetLevel_8  := gvlDALI.aPySetLevel[8];   nLevel_8  := gvlDALI.aPyLevel[8];
+bSetLevel_9  := gvlDALI.aPySetLevel[9];   nLevel_9  := gvlDALI.aPyLevel[9];
+bSetLevel_10 := gvlDALI.aPySetLevel[10];  nLevel_10 := gvlDALI.aPyLevel[10];
+bSetLevel_11 := gvlDALI.aPySetLevel[11];  nLevel_11 := gvlDALI.aPyLevel[11];
+bSetLevel_12 := gvlDALI.aPySetLevel[12];  nLevel_12 := gvlDALI.aPyLevel[12];
+bSetLevel_13 := gvlDALI.aPySetLevel[13];  nLevel_13 := gvlDALI.aPyLevel[13];
+bSetLevel_14 := gvlDALI.aPySetLevel[14];  nLevel_14 := gvlDALI.aPyLevel[14];
+bSetLevel_15 := gvlDALI.aPySetLevel[15];  nLevel_15 := gvlDALI.aPyLevel[15];
+bSetLevel_16 := gvlDALI.aPySetLevel[16];  nLevel_16 := gvlDALI.aPyLevel[16];
+
+// ── Dimmer 1 — Living Room (SW 1) ────────────────────────────────────────────
+fbDALI102Dimmer1Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 1,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[1],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_1,
+    nLevel               := nLevel_1,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_1 := fbDALI102Dimmer1Switch.nActualLevel;
+gvlDALI.aPyActualLevel[1] := nActualLevel_1;
+
+// ── Dimmer 2 — Living Room (SW 1) ────────────────────────────────────────────
+fbDALI102Dimmer2Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 2,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[1],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_2,
+    nLevel               := nLevel_2,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_2 := fbDALI102Dimmer2Switch.nActualLevel;
+gvlDALI.aPyActualLevel[2] := nActualLevel_2;
+
+// ── Dimmer 3 — Living Room (SW 1) ────────────────────────────────────────────
+fbDALI102Dimmer3Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 3,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[1],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_3,
+    nLevel               := nLevel_3,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_3 := fbDALI102Dimmer3Switch.nActualLevel;
+gvlDALI.aPyActualLevel[3] := nActualLevel_3;
+
+// ── Dimmer 4 — Living Room (SW 1) ────────────────────────────────────────────
+fbDALI102Dimmer4Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 4,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[1],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_4,
+    nLevel               := nLevel_4,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_4 := fbDALI102Dimmer4Switch.nActualLevel;
+gvlDALI.aPyActualLevel[4] := nActualLevel_4;
+
+// ── Dimmer 5 — Dining Room (SW 2) ────────────────────────────────────────────
+fbDALI102Dimmer5Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 5,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[2],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_5,
+    nLevel               := nLevel_5,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_5 := fbDALI102Dimmer5Switch.nActualLevel;
+gvlDALI.aPyActualLevel[5] := nActualLevel_5;
+
+// ── Dimmer 6 — Dining Room (SW 2) ────────────────────────────────────────────
+fbDALI102Dimmer6Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 6,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[2],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_6,
+    nLevel               := nLevel_6,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_6 := fbDALI102Dimmer6Switch.nActualLevel;
+gvlDALI.aPyActualLevel[6] := nActualLevel_6;
+
+// ── Dimmer 7 — Dining Room (SW 2) ────────────────────────────────────────────
+fbDALI102Dimmer7Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 7,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[2],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_7,
+    nLevel               := nLevel_7,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_7 := fbDALI102Dimmer7Switch.nActualLevel;
+gvlDALI.aPyActualLevel[7] := nActualLevel_7;
+
+// ── Dimmer 8 — Dining Room (SW 2) ────────────────────────────────────────────
+fbDALI102Dimmer8Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 8,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[2],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_8,
+    nLevel               := nLevel_8,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_8 := fbDALI102Dimmer8Switch.nActualLevel;
+gvlDALI.aPyActualLevel[8] := nActualLevel_8;
+
+// ── Dimmer 9 — Bedroom 1 (SW 3) ──────────────────────────────────────────────
+fbDALI102Dimmer9Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 9,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[3],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_9,
+    nLevel               := nLevel_9,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_9 := fbDALI102Dimmer9Switch.nActualLevel;
+gvlDALI.aPyActualLevel[9] := nActualLevel_9;
+
+// ── Dimmer 10 — Bedroom 1 (SW 3) ─────────────────────────────────────────────
+fbDALI102Dimmer10Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 10,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[3],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_10,
+    nLevel               := nLevel_10,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_10 := fbDALI102Dimmer10Switch.nActualLevel;
+gvlDALI.aPyActualLevel[10] := nActualLevel_10;
+
+// ── Dimmer 11 — Bedroom 2 (SW 4) ─────────────────────────────────────────────
+fbDALI102Dimmer11Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 11,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[4],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_11,
+    nLevel               := nLevel_11,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_11 := fbDALI102Dimmer11Switch.nActualLevel;
+gvlDALI.aPyActualLevel[11] := nActualLevel_11;
+
+// ── Dimmer 12 — Bedroom 2 (SW 4) ─────────────────────────────────────────────
+fbDALI102Dimmer12Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 12,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[4],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_12,
+    nLevel               := nLevel_12,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_12 := fbDALI102Dimmer12Switch.nActualLevel;
+gvlDALI.aPyActualLevel[12] := nActualLevel_12;
+
+// ── Dimmer 13 — Kitchen (SW 5) ───────────────────────────────────────────────
+fbDALI102Dimmer13Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 13,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[5],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_13,
+    nLevel               := nLevel_13,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_13 := fbDALI102Dimmer13Switch.nActualLevel;
+gvlDALI.aPyActualLevel[13] := nActualLevel_13;
+
+// ── Dimmer 14 — Kitchen (SW 5) ───────────────────────────────────────────────
+fbDALI102Dimmer14Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 14,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[5],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_14,
+    nLevel               := nLevel_14,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_14 := fbDALI102Dimmer14Switch.nActualLevel;
+gvlDALI.aPyActualLevel[14] := nActualLevel_14;
+
+// ── Dimmer 15 — Hallway (SW 6) ───────────────────────────────────────────────
+fbDALI102Dimmer15Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 15,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[6],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_15,
+    nLevel               := nLevel_15,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_15 := fbDALI102Dimmer15Switch.nActualLevel;
+gvlDALI.aPyActualLevel[15] := nActualLevel_15;
+
+// ── Dimmer 16 — Hallway (SW 6) ───────────────────────────────────────────────
+fbDALI102Dimmer16Switch(
+    bInitialize          := bInitialize,
+    nAddress             := 16,
+    eAddressType         := E_DALIAddressType.Short,
+    bSwitch              := gvlDALI.aSwitch[6],
+    bOff                 := gvlIO.bLockdownActive,
+    bSetLevel            := bSetLevel_16,
+    nLevel               := nLevel_16,
+    nLevelMemoryMode     := nLevelMemoryMode,
+    tCycleActualLevel    := tCycleActualLevel,
+    nOptions             := nOptions
+);
+nActualLevel_16 := fbDALI102Dimmer16Switch.nActualLevel;
+gvlDALI.aPyActualLevel[16] := nActualLevel_16;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
