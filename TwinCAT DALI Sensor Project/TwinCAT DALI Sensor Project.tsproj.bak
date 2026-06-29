@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.66">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.74">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{9A955222-AEEB-8157-F0A3-131368033DED}" Namespace="Tc3_DALI" AutoDeleteType="true">ST_KL6821InData</Name>
@@ -54,7 +54,7 @@
 			</SubItem>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{7B210F77-F342-4638-8FD7-0870B9E914E0}" Target64Bit="true" ShowHideConfigurations="#x6">
+	<Project ProjectGUID="{7B210F77-F342-4638-8FD7-0870B9E914E0}" TargetNetId="5.168.214.78.1.1" ShowHideConfigurations="#x6">
 		<System>
 			<Settings>
 				<IoIdleTask Priority="8"/>
@@ -70,13 +70,14 @@
 		</System>
 		<Plc>
 			<Project GUID="{BBD3E97C-7C2F-45A5-AAAD-2EA0084893FC}" Name="DALI_PLC" PrjFilePath="DALI_PLC\DALI_PLC.plcproj" TmcFilePath="DALI_PLC\DALI_PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="DALI_PLC\DALI_PLC.tmc" TmcHash="{9C2C4A73-3C24-ABE2-8C97-A72A8838993C}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="DALI_PLC\DALI_PLC.tmc" TmcHash="{8CFBB4C6-639D-989C-8E03-AA47FC280960}">
 					<Name>DALI_PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>DALI Inputs</Name>
 						<Var>
 							<Name>gvlDALI.stKL6821InData</Name>
+							<Comment><![CDATA[ ── KL6821 DALI hardware ──────────────────────────────]]></Comment>
 							<Type GUID="{9A955222-AEEB-8157-F0A3-131368033DED}" Namespace="Tc3_DALI">ST_KL6821InData</Type>
 						</Var>
 					</Vars>
@@ -90,17 +91,201 @@
 					<Vars VarGrpType="1" ContextId="1" AreaNo="16">
 						<Name>PlcTask Inputs</Name>
 						<Var>
+							<Name>gvlDALI.bOff</Name>
+							<Comment><![CDATA[ ── DALI switch inputs (KL1809) ───────────────────────]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bOff1</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bOff2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bOff3</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bOff4</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>gvlDALI.bSwitchOn</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>gvlDALI.bSwitchOn1</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn4</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn5</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn6</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn7</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn8</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn9</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn10</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn11</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn12</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn13</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn14</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn15</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn16</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn17</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn18</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn19</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn20</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn21</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn22</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn23</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn24</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn25</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn26</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn27</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn28</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn29</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>gvlDALI.gButtonLightOn</Name>
-							<Comment><![CDATA[ Output from button POU]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>gvlDALI.gMotionLightOn</Name>
-							<Comment><![CDATA[ Output from motion POU]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn30</Name>
+							<Comment><![CDATA[ ── Wall light inputs (KL1819) ────────────────────────]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn31</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn32</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSwitchOn33</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSensor0</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSensor1</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSensor2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bSensor3</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" ContextId="1" AreaNo="17">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>gvlDALI.bRelay0</Name>
+							<Comment><![CDATA[ ── Wall light outputs (KL2809) ───────────────────────]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bRelay1</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bRelay2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>gvlDALI.bRelay3</Name>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
@@ -179,7 +364,7 @@
 			<Device Id="2" DevType="120">
 				<Name>Device 2 (CX-BK)</Name>
 				<DevData>000000c0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffff0000000000000100000007000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="1" AddrType="1" ImageType="3" SizeIn="10" SizeOut="12">
+				<Image Id="1" AddrType="1" ImageType="3" SizeIn="12" SizeOut="18">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="1" BoxType="9703" AmsPort="28928">
@@ -210,8 +395,8 @@ Bit 15 = Acyc. Function atcive (e.g. K-Bus Reset)
 						</Var>
 					</Vars>
 					<BusCoupler ComplexTermSupport="true" NewHardware="true">
-						<Term Id="2" TermType="#x580" Fieldbus="6">
-							<Name>Term 2 (KL1408)</Name>
+						<Term Id="2" TermType="#x711" Fieldbus="6">
+							<Name>Term 2 (KL1809)</Name>
 							<ImageId>7</ImageId>
 							<Vars VarGrpType="3">
 								<Name>Channel 1</Name>
@@ -285,9 +470,677 @@ Bit 15 = Acyc. Function atcive (e.g. K-Bus Reset)
 									<InOut>0</InOut>
 								</Var>
 							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 9</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>88</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 10</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>89</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 11</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>90</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 12</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>91</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 13</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>92</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 14</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>93</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 15</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>94</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 16</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>95</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
 						</Term>
-						<Term Id="3" TermType="#x1aa5" Fieldbus="6">
-							<Name>Term 3 (KL6821)</Name>
+						<Term Id="3" TermType="#x711" Fieldbus="6">
+							<Name>Term 3 (KL1809)</Name>
+							<ImageId>7</ImageId>
+							<Vars VarGrpType="3">
+								<Name>Channel 1</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>96</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 2</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>97</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 3</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>98</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 4</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>99</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 5</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>100</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 6</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>101</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 7</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>102</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 8</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>103</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 9</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>104</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 10</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>105</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 11</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>106</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 12</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>107</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 13</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>108</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 14</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>109</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 15</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>110</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 16</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>111</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+						</Term>
+						<Term Id="4" TermType="#x711" Fieldbus="6">
+							<Name>Term 4 (KL1809)</Name>
+							<ImageId>7</ImageId>
+							<Vars VarGrpType="3">
+								<Name>Channel 1</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>112</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 2</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>113</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 3</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>114</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 4</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>115</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 5</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>116</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 6</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>117</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 7</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>118</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 8</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>119</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 9</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>120</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 10</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>121</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 11</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>122</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 12</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>123</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 13</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>124</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 14</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>125</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 15</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>126</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 16</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>127</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+						</Term>
+						<Term Id="5" TermType="#x580" Fieldbus="6">
+							<Name>Term 5 (KL1408)</Name>
+							<ImageId>7</ImageId>
+							<Vars VarGrpType="3">
+								<Name>Channel 1</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>128</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 2</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>129</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 3</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>130</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 4</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>131</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 5</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>132</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 6</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>133</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 7</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>134</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 8</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>135</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+						</Term>
+						<Term Id="6" TermType="#x580" Fieldbus="6">
+							<Name>Term 6 (KL1408)</Name>
+							<ImageId>7</ImageId>
+							<Vars VarGrpType="3">
+								<Name>Channel 1</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>136</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 2</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>137</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 3</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>138</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 4</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>139</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 5</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>140</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 6</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>141</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 7</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>142</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 8</Name>
+								<Var>
+									<Name>Input</Name>
+									<Type>BIT</Type>
+									<BitOffs>143</BitOffs>
+									<InOut>0</InOut>
+								</Var>
+							</Vars>
+						</Term>
+						<Term Id="7" TermType="#xaf9" Fieldbus="6">
+							<Name>Term 7 (KL2809)</Name>
+							<ImageId>31</ImageId>
+							<Vars VarGrpType="3">
+								<Name>Channel 1</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>80</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 2</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>81</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 3</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>82</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 4</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>83</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 5</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>84</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 6</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>85</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 7</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>86</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 8</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>87</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 9</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>88</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 10</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>89</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 11</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>90</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 12</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>91</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 13</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>92</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 14</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>93</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 15</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>94</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="3">
+								<Name>Channel 16</Name>
+								<Var>
+									<Name>Output</Name>
+									<Type>BIT</Type>
+									<BitOffs>95</BitOffs>
+									<InOut>1</InOut>
+								</Var>
+							</Vars>
+						</Term>
+						<Term Id="8" TermType="#x1aa5" Fieldbus="6">
+							<Name>Term 8 (KL6821)</Name>
 							<ImageId>32</ImageId>
 							<Vars VarGrpType="3">
 								<Name>Channel 1</Name>
@@ -368,18 +1221,52 @@ Bit 15 = Acyc. Function atcive (e.g. K-Bus Reset)
 		<MappingInfo Identifier="{08502002-0010-0304-0020-500810000403}" Id="#x02030020" Watchdog="00000000000000000000000000000000"/>
 		<OwnerA Name="TIPC^DALI_PLC^DALI_PLC Instance">
 			<OwnerB Name="TIID^Device 2 (CX-BK)^Box 1 (CX-BK)">
-				<Link VarA="DALI Inputs^gvlDALI.stKL6821InData^aData[0]" VarB="Term 3 (KL6821)^Channel 1^Data In 0"/>
-				<Link VarA="DALI Inputs^gvlDALI.stKL6821InData^aData[1]" VarB="Term 3 (KL6821)^Channel 1^Data In 1"/>
-				<Link VarA="DALI Inputs^gvlDALI.stKL6821InData^aData[2]" VarB="Term 3 (KL6821)^Channel 1^Data In 2"/>
-				<Link VarA="DALI Inputs^gvlDALI.stKL6821InData^aData[3]" VarB="Term 3 (KL6821)^Channel 1^Data In 3"/>
-				<Link VarA="DALI Inputs^gvlDALI.stKL6821InData^nStatus" VarB="Term 3 (KL6821)^Channel 1^State"/>
-				<Link VarA="DALI Outputs^gvlDALI.stKL6821OutData^aData[0]" VarB="Term 3 (KL6821)^Channel 1^Data Out 0"/>
-				<Link VarA="DALI Outputs^gvlDALI.stKL6821OutData^aData[1]" VarB="Term 3 (KL6821)^Channel 1^Data Out 1"/>
-				<Link VarA="DALI Outputs^gvlDALI.stKL6821OutData^aData[2]" VarB="Term 3 (KL6821)^Channel 1^Data Out 2"/>
-				<Link VarA="DALI Outputs^gvlDALI.stKL6821OutData^aData[3]" VarB="Term 3 (KL6821)^Channel 1^Data Out 3"/>
-				<Link VarA="DALI Outputs^gvlDALI.stKL6821OutData^nCtrl" VarB="Term 3 (KL6821)^Channel 1^Ctrl"/>
-				<Link VarA="PlcTask Inputs^gvlDALI.gButtonLightOn" VarB="Term 2 (KL1408)^Channel 1^Input"/>
-				<Link VarA="PlcTask Inputs^gvlDALI.gMotionLightOn" VarB="Term 2 (KL1408)^Channel 3^Input"/>
+				<Link VarA="DALI Inputs^gvlDALI.stKL6821InData^aData[0]" VarB="Term 8 (KL6821)^Channel 1^Data In 0"/>
+				<Link VarA="DALI Inputs^gvlDALI.stKL6821InData^aData[1]" VarB="Term 8 (KL6821)^Channel 1^Data In 1"/>
+				<Link VarA="DALI Inputs^gvlDALI.stKL6821InData^aData[2]" VarB="Term 8 (KL6821)^Channel 1^Data In 2"/>
+				<Link VarA="DALI Inputs^gvlDALI.stKL6821InData^aData[3]" VarB="Term 8 (KL6821)^Channel 1^Data In 3"/>
+				<Link VarA="DALI Inputs^gvlDALI.stKL6821InData^nStatus" VarB="Term 8 (KL6821)^Channel 1^State"/>
+				<Link VarA="DALI Outputs^gvlDALI.stKL6821OutData^aData[0]" VarB="Term 8 (KL6821)^Channel 1^Data Out 0"/>
+				<Link VarA="DALI Outputs^gvlDALI.stKL6821OutData^aData[1]" VarB="Term 8 (KL6821)^Channel 1^Data Out 1"/>
+				<Link VarA="DALI Outputs^gvlDALI.stKL6821OutData^aData[2]" VarB="Term 8 (KL6821)^Channel 1^Data Out 2"/>
+				<Link VarA="DALI Outputs^gvlDALI.stKL6821OutData^aData[3]" VarB="Term 8 (KL6821)^Channel 1^Data Out 3"/>
+				<Link VarA="DALI Outputs^gvlDALI.stKL6821OutData^nCtrl" VarB="Term 8 (KL6821)^Channel 1^Ctrl"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bOff" VarB="Term 3 (KL1809)^Channel 4^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bOff1" VarB="Term 5 (KL1408)^Channel 3^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bOff2" VarB="Term 4 (KL1809)^Channel 12^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bOff3" VarB="Term 4 (KL1809)^Channel 5^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bOff4" VarB="Term 4 (KL1809)^Channel 2^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn" VarB="Term 5 (KL1408)^Channel 6^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn1" VarB="Term 3 (KL1809)^Channel 15^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn10" VarB="Term 2 (KL1809)^Channel 2^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn11" VarB="Term 2 (KL1809)^Channel 3^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn12" VarB="Term 2 (KL1809)^Channel 4^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn13" VarB="Term 4 (KL1809)^Channel 14^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn14" VarB="Term 4 (KL1809)^Channel 13^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn15" VarB="Term 2 (KL1809)^Channel 1^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn16" VarB="Term 4 (KL1809)^Channel 16^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn17" VarB="Term 4 (KL1809)^Channel 15^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn18" VarB="Term 5 (KL1408)^Channel 1^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn19" VarB="Term 4 (KL1809)^Channel 11^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn2" VarB="Term 3 (KL1809)^Channel 12^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn20" VarB="Term 4 (KL1809)^Channel 6^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn21" VarB="Term 6 (KL1408)^Channel 3^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn22" VarB="Term 4 (KL1809)^Channel 8^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn23" VarB="Term 4 (KL1809)^Channel 10^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn24" VarB="Term 4 (KL1809)^Channel 3^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn25" VarB="Term 4 (KL1809)^Channel 1^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn26" VarB="Term 2 (KL1809)^Channel 11^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn27" VarB="Term 2 (KL1809)^Channel 12^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn28" VarB="Term 2 (KL1809)^Channel 10^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn29" VarB="Term 2 (KL1809)^Channel 9^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn30" VarB="Term 6 (KL1408)^Channel 4^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn4" VarB="Term 2 (KL1809)^Channel 14^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn5" VarB="Term 3 (KL1809)^Channel 2^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn6" VarB="Term 3 (KL1809)^Channel 13^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn7" VarB="Term 3 (KL1809)^Channel 14^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn8" VarB="Term 3 (KL1809)^Channel 11^Input"/>
+				<Link VarA="PlcTask Inputs^gvlDALI.bSwitchOn9" VarB="Term 3 (KL1809)^Channel 7^Input"/>
+				<Link VarA="PlcTask Outputs^gvlDALI.bRelay0" VarB="Term 7 (KL2809)^Channel 3^Output"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

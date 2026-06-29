@@ -3,23 +3,81 @@
   <GVL Name="gvlDALI" Id="{ab3b6ad3-2b9d-4e07-901d-5f8aa5a92bd9}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	bSwitchOn           AT %I* : BOOL;
-    stKL6821InData      AT %I* : ST_KL6821InData;
-    stKL6821OutData     AT %Q* : ST_KL6821OutData;
-	gLightOn         : BOOL; // Final output state
-    gButtonLightOn   AT %I* : BOOL; // Output from button POU
-    gMotionLightOn   AT %I* : BOOL; // Output from motion POU
-    aPyLevel        : ARRAY[1..16] OF BYTE;     // desired level per dimmer
-    aPySetLevel     : ARRAY[1..16] OF BOOL;     // rising edge triggers set
+    // ── KL6821 DALI hardware ──────────────────────────────
+    stKL6821InData         AT %I* : ST_KL6821InData;
+    stKL6821OutData        AT %Q* : ST_KL6821OutData;
 
-    // Actual level readback (read by PyADS)
-    aPyActualLevel  : ARRAY[1..16] OF BYTE;
-	     aWallRelay  : ARRAY[1..4] OF BOOL;  // AT %Q*
-	aPyWallRelay    : ARRAY[1..4] OF BOOL;  // from PyADS (app)
-	aPyWallRelayState   : ARRAY[1..4] OF BOOL;  // readback → app
-	// Pushbutton inputs (BTicino L4036, via KL1809)
-    aSwitch     : ARRAY[1..40] OF BOOL AT %I*;  // up to 40 inputs (20 x L4036)
-	
+    // ── DALI switch inputs (KL1809) ───────────────────────
+    bOff                   AT %I* : BOOL;
+    bOff1                  AT %I* : BOOL;
+    bOff2                  AT %I* : BOOL;
+    bOff3                  AT %I* : BOOL;
+    bOff4                  AT %I* : BOOL;
+    bSwitchOn              AT %I* : BOOL;
+    bSwitchOn1             AT %I* : BOOL;
+    bSwitchOn2             AT %I* : BOOL;
+    bSwitchOn4             AT %I* : BOOL;
+    bSwitchOn5             AT %I* : BOOL;
+    bSwitchOn6             AT %I* : BOOL;
+    bSwitchOn7             AT %I* : BOOL;
+    bSwitchOn8             AT %I* : BOOL;
+    bSwitchOn9             AT %I* : BOOL;
+    bSwitchOn10            AT %I* : BOOL;
+    bSwitchOn11            AT %I* : BOOL;
+    bSwitchOn12            AT %I* : BOOL;
+    bSwitchOn13            AT %I* : BOOL;
+    bSwitchOn14            AT %I* : BOOL;
+    bSwitchOn15            AT %I* : BOOL;
+    bSwitchOn16            AT %I* : BOOL;
+    bSwitchOn17            AT %I* : BOOL;
+    bSwitchOn18            AT %I* : BOOL;
+    bSwitchOn19            AT %I* : BOOL;
+    bSwitchOn20            AT %I* : BOOL;
+    bSwitchOn21            AT %I* : BOOL;
+    bSwitchOn22            AT %I* : BOOL;
+    bSwitchOn23            AT %I* : BOOL;
+    bSwitchOn24            AT %I* : BOOL;
+    bSwitchOn25            AT %I* : BOOL;
+    bSwitchOn26            AT %I* : BOOL;
+    bSwitchOn27            AT %I* : BOOL;
+    bSwitchOn28            AT %I* : BOOL;
+    bSwitchOn29            AT %I* : BOOL;
+    gButtonLightOn         AT %I* : BOOL;
+    gMotionLightOn         AT %I* : BOOL;
+
+    // ── Wall light inputs (KL1819) ────────────────────────
+    bSwitchOn30            AT %I* : BOOL;
+    bSwitchOn31            AT %I* : BOOL;
+    bSwitchOn32            AT %I* : BOOL;
+    bSwitchOn33            AT %I* : BOOL;
+    bSensor0               AT %I* : BOOL;
+    bSensor1               AT %I* : BOOL;
+    bSensor2               AT %I* : BOOL;
+    bSensor3               AT %I* : BOOL;
+
+    // ── Wall light outputs (KL2809) ───────────────────────
+    bRelay0                AT %Q* : BOOL;
+    bRelay1                AT %Q* : BOOL;
+    bRelay2                AT %Q* : BOOL;
+    bRelay3                AT %Q* : BOOL;
+
+    // ── Other non-persistent globals ─────────────────────
+    gLightOn               : BOOL;
+    bManualMode            : BOOL;
+
+    // ── PyADS bridge: app ↔ PLC control points ────────────
+    // Wall relay control (4 physical relays, bRelay0-3) — wired in
+    // WallLight_POU below; app writes aPyWallRelay, reads aPyWallRelayState.
+    aPyWallRelay           : ARRAY[1..4] OF BOOL;
+    aPyWallRelayState      : ARRAY[1..4] OF BOOL;
+
+    // DALI dimmer level control (28 addresses driven by POU.TcPOU) — NOT YET
+    // WIRED. POU.TcPOU is a graphical CFC; connect aPySetLevel[N]/aPyLevel[N]
+    // to each fbDALI102DimmerNSwitch block's bSetLevel/nLevel input pins, and
+    // aPyActualLevel[N] from its nActualLevel output, in the TwinCAT CFC editor.
+    aPyLevel               : ARRAY[1..28] OF BYTE;
+    aPySetLevel            : ARRAY[1..28] OF BOOL;
+    aPyActualLevel         : ARRAY[1..28] OF BYTE;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

@@ -3,21 +3,17 @@
   <POU Name="MAIN" Id="{7d680b2f-8db9-4f1e-8602-1c7527d7b88c}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-    // Latches and timers
-    bManualMode     : BOOL;   // TRUE = button has priority
-    bRestartTimer   : BOOL;   // one-shot to reset/restart the TON
-    prevBtnState    : BOOL;   // for edge detection on gButtonLightOn
+    bStartupDone   : BOOL := FALSE;   // runs once on boot
+    tonStartDelay  : TON;             // small delay to let DALI bus settle first
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// === 1) Always run sub-programs so they update their outputs ===
-POU_DALIModule();         // updates gvlDALI.gButtonLightOn
-POU_WALLLIGHT();
-PyADS_POU();]]></ST>
+      <ST><![CDATA[
+POU();
+WallLight_POU();]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="135" Count="1" />
-      <LineId Id="144" Count="0" />
-      <LineId Id="36" Count="0" />
+      <LineId Id="190" Count="1" />
+      <LineId Id="158" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

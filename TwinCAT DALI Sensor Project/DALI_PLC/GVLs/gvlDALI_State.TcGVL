@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <GVL Name="gvlDALI_State" Id="{ce1ae8ea-59ab-4b09-b253-f49b93e8f982}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL PERSISTENT
+    // ── Wall light states — the ONLY things that need saving ──
+    bLightState0           : BOOL;
+    bLightState1           : BOOL;
+    bLightState2           : BOOL;
+    bLightState3           : BOOL;
+
+    bSensorOn0             : BOOL;
+    bSensorOn1             : BOOL;
+    bSensorOn2             : BOOL;
+    bSensorOn3             : BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

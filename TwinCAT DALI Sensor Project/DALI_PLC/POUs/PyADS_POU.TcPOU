@@ -6,21 +6,17 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// ── DALI: App → Dimmer levels (already synced in POU_DALIModule via GVL) ─────
-// gvlDALI.aPyLevel[1..16]    written by app → read in POU_DALIModule
-// gvlDALI.aPySetLevel[1..16] written by app → rising edge in POU_DALIModule
+      <ST><![CDATA[// This POU is not called from MAIN — kept as documentation only.
+// (Previously referenced gvlDALI.aWallRelay, which was never declared;
+// that would fail a project build. The actual relay app-bridge now lives
+// in WallLight_POU, which reads/writes aPyWallRelay/aPyWallRelayState
+// directly against gvlDALI_State.bLightStateN.)
 
-// ── DALI: Actual levels → App (readback) ─────────────────────────────────────
-// gvlDALI.aPyActualLevel[1..16] written by POU_DALIModule → read by app
-
-// ── Wall lights: App → Relay (via GVL, POU_WALLLIGHT reads directly) ─────────
-// gvlDALI.aPyWallRelay[1..4] written by app → read in POU_WALLLIGHT
-
-// ── Wall lights: State → App (readback) ──────────────────────────────────────
-gvlDALI.aPyWallRelayState[1] := gvlDALI.aWallRelay[1];
-gvlDALI.aPyWallRelayState[2] := gvlDALI.aWallRelay[2];
-gvlDALI.aPyWallRelayState[3] := gvlDALI.aWallRelay[3];
-gvlDALI.aPyWallRelayState[4] := gvlDALI.aWallRelay[4];]]></ST>
+// ── DALI: App → Dimmer levels — NOT YET WIRED ─────────────────────────────
+// gvlDALI.aPyLevel[1..28] / aPySetLevel[1..28] are declared but unconnected.
+// POU.TcPOU is a graphical CFC; wire these into each fbDALI102DimmerNSwitch
+// block's bSetLevel/nLevel input pins in the TwinCAT CFC editor, and wire
+// aPyActualLevel[N] from each block's nActualLevel output.]]></ST>
     </Implementation>
     <LineIds Name="PyADS_POU">
       <LineId Id="26" Count="6" />

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="WallLight_POU" Id="{5be1775f-0984-42dd-bcd9-f80bc39c0f9f}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM WallLight_POU
+VAR CONSTANT
+    // How long a manual OFF (button or app) suppresses the presence sensor
+    // from immediately turning the light back on. A deliberate "I'm leaving
+    // this off" should stick for a while even if the sensor still sees
+    // motion; after this window expires, normal automatic behavior resumes.
+    cTempOffSuppress : TIME := T#15M;
+END_VAR
+VAR
+    rTrig_Button0  : R_TRIG;
+    rTrig_Button1  : R_TRIG;
+    rTrig_Button2  : R_TRIG;
+    rTrig_Button3  : R_TRIG;
+    tOff0          : TON;
+    tOff1          : TON;
+    tOff2          : TON;
+    tOff3          : TON;
+
+    // TRUE while a manual OFF (button or app) is actively suppressing the
+    // presence sensor's auto-on for this light.
+    bManualOverride0 : BOOL;
+    bManualOverride1 : BOOL;
+    bManualOverride2 : BOOL;
+    bManualOverride3 : BOOL;
+    tManualOverride0 : TON;
+    tManualOverride1 : TON;
+    tManualOverride2 : TON;
+    tManualOverride3 : TON;
+
+    // Last-seen value of each aPyWallRelay[N] — used to detect a fresh
+    // app command (edge) without fighting the local button/motion logic.
+    aPyWallRelayLast : ARRAY[1..4] OF BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ============================================================
+// LIGHT 1 — three control sources: physical switch, presence
+// sensor (bSensor0), phone app (aPyWallRelay[1]).
+// ============================================================
+// ── App command (PyADS bridge) ───────────────────────────────────────────
+IF gvlDALI.aPyWallRelay[1] <> aPyWallRelayLast[1] THEN
+    gvlDALI_State.bLightState0 := gvlDALI.aPyWallRelay[1];
+    gvlDALI_State.bSensorOn0   := FALSE;
+    // App turned it OFF → temporarily suppress the sensor, like a manual
+    // switch-off. App turned it ON → clear any suppression immediately.
+    bManualOverride0           := NOT gvlDALI.aPyWallRelay[1];
+END_IF
+
+// ── Physical switch ───────────────────────────────────────────────────────
+rTrig_Button0(CLK := gvlDALI.bSwitchOn30);
+IF rTrig_Button0.Q THEN
+    gvlDALI_State.bLightState0 := NOT gvlDALI_State.bLightState0;
+    gvlDALI_State.bSensorOn0   := FALSE;
+    bManualOverride0           := NOT gvlDALI_State.bLightState0;
+END_IF
+
+// ── Presence sensor (suppressed during a manual-override window) ────────
+IF gvlDALI.bSensor0 AND NOT gvlDALI_State.bLightState0 AND NOT bManualOverride0 THEN
+    gvlDALI_State.bLightState0 := TRUE;
+    gvlDALI_State.bSensorOn0   := TRUE;
+END_IF
+
+// ── Manual-override expiry ───────────────────────────────────────────────
+tManualOverride0(IN := bManualOverride0, PT := cTempOffSuppress);
+IF tManualOverride0.Q THEN
+    bManualOverride0 := FALSE;
+END_IF
+
+// ── Sensor-driven auto-off ────────────────────────────────────────────────
+tOff0(IN := gvlDALI_State.bSensorOn0, PT := T#10M);
+IF tOff0.Q THEN
+    gvlDALI_State.bLightState0 := FALSE;
+    gvlDALI_State.bSensorOn0   := FALSE;
+END_IF
+gvlDALI.bRelay0 := gvlDALI_State.bLightState0;
+
+// resync the app-facing tags so next scan's edge check only fires on a
+// genuine new command from the app, not on a local button/motion change.
+gvlDALI.aPyWallRelay[1]      := gvlDALI_State.bLightState0;
+aPyWallRelayLast[1]          := gvlDALI_State.bLightState0;
+gvlDALI.aPyWallRelayState[1] := gvlDALI_State.bLightState0;
+
+// ============================================================
+// LIGHT 2
+// ============================================================
+IF gvlDALI.aPyWallRelay[2] <> aPyWallRelayLast[2] THEN
+    gvlDALI_State.bLightState1 := gvlDALI.aPyWallRelay[2];
+    gvlDALI_State.bSensorOn1   := FALSE;
+    bManualOverride1           := NOT gvlDALI.aPyWallRelay[2];
+END_IF
+
+rTrig_Button1(CLK := gvlDALI.bSwitchOn31);
+IF rTrig_Button1.Q THEN
+    gvlDALI_State.bLightState1 := NOT gvlDALI_State.bLightState1;
+    gvlDALI_State.bSensorOn1   := FALSE;
+    bManualOverride1           := NOT gvlDALI_State.bLightState1;
+END_IF
+
+IF gvlDALI.bSensor1 AND NOT gvlDALI_State.bLightState1 AND NOT bManualOverride1 THEN
+    gvlDALI_State.bLightState1 := TRUE;
+    gvlDALI_State.bSensorOn1   := TRUE;
+END_IF
+
+tManualOverride1(IN := bManualOverride1, PT := cTempOffSuppress);
+IF tManualOverride1.Q THEN
+    bManualOverride1 := FALSE;
+END_IF
+
+tOff1(IN := gvlDALI_State.bSensorOn1, PT := T#10M);
+IF tOff1.Q THEN
+    gvlDALI_State.bLightState1 := FALSE;
+    gvlDALI_State.bSensorOn1   := FALSE;
+END_IF
+gvlDALI.bRelay1 := gvlDALI_State.bLightState1;
+
+gvlDALI.aPyWallRelay[2]      := gvlDALI_State.bLightState1;
+aPyWallRelayLast[2]          := gvlDALI_State.bLightState1;
+gvlDALI.aPyWallRelayState[2] := gvlDALI_State.bLightState1;
+
+// ============================================================
+// LIGHT 3
+// ============================================================
+IF gvlDALI.aPyWallRelay[3] <> aPyWallRelayLast[3] THEN
+    gvlDALI_State.bLightState2 := gvlDALI.aPyWallRelay[3];
+    gvlDALI_State.bSensorOn2   := FALSE;
+    bManualOverride2           := NOT gvlDALI.aPyWallRelay[3];
+END_IF
+
+rTrig_Button2(CLK := gvlDALI.bSwitchOn32);
+IF rTrig_Button2.Q THEN
+    gvlDALI_State.bLightState2 := NOT gvlDALI_State.bLightState2;
+    gvlDALI_State.bSensorOn2   := FALSE;
+    bManualOverride2           := NOT gvlDALI_State.bLightState2;
+END_IF
+
+IF gvlDALI.bSensor2 AND NOT gvlDALI_State.bLightState2 AND NOT bManualOverride2 THEN
+    gvlDALI_State.bLightState2 := TRUE;
+    gvlDALI_State.bSensorOn2   := TRUE;
+END_IF
+
+tManualOverride2(IN := bManualOverride2, PT := cTempOffSuppress);
+IF tManualOverride2.Q THEN
+    bManualOverride2 := FALSE;
+END_IF
+
+tOff2(IN := gvlDALI_State.bSensorOn2, PT := T#10M);
+IF tOff2.Q THEN
+    gvlDALI_State.bLightState2 := FALSE;
+    gvlDALI_State.bSensorOn2   := FALSE;
+END_IF
+gvlDALI.bRelay2 := gvlDALI_State.bLightState2;
+
+gvlDALI.aPyWallRelay[3]      := gvlDALI_State.bLightState2;
+aPyWallRelayLast[3]          := gvlDALI_State.bLightState2;
+gvlDALI.aPyWallRelayState[3] := gvlDALI_State.bLightState2;
+
+// ============================================================
+// LIGHT 4
+// ============================================================
+IF gvlDALI.aPyWallRelay[4] <> aPyWallRelayLast[4] THEN
+    gvlDALI_State.bLightState3 := gvlDALI.aPyWallRelay[4];
+    gvlDALI_State.bSensorOn3   := FALSE;
+    bManualOverride3           := NOT gvlDALI.aPyWallRelay[4];
+END_IF
+
+rTrig_Button3(CLK := gvlDALI.bSwitchOn33);
+IF rTrig_Button3.Q THEN
+    gvlDALI_State.bLightState3 := NOT gvlDALI_State.bLightState3;
+    gvlDALI_State.bSensorOn3   := FALSE;
+    bManualOverride3           := NOT gvlDALI_State.bLightState3;
+END_IF
+
+IF gvlDALI.bSensor3 AND NOT gvlDALI_State.bLightState3 AND NOT bManualOverride3 THEN
+    gvlDALI_State.bLightState3 := TRUE;
+    gvlDALI_State.bSensorOn3   := TRUE;
+END_IF
+
+tManualOverride3(IN := bManualOverride3, PT := cTempOffSuppress);
+IF tManualOverride3.Q THEN
+    bManualOverride3 := FALSE;
+END_IF
+
+tOff3(IN := gvlDALI_State.bSensorOn3, PT := T#10M);
+IF tOff3.Q THEN
+    gvlDALI_State.bLightState3 := FALSE;
+    gvlDALI_State.bSensorOn3   := FALSE;
+END_IF
+gvlDALI.bRelay3 := gvlDALI_State.bLightState3;
+
+gvlDALI.aPyWallRelay[4]      := gvlDALI_State.bLightState3;
+aPyWallRelayLast[4]          := gvlDALI_State.bLightState3;
+gvlDALI.aPyWallRelayState[4] := gvlDALI_State.bLightState3;]]></ST>
+    </Implementation>
+    <LineIds Name="WallLight_POU">
+      <LineId Id="172" Count="73" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

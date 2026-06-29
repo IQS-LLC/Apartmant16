@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <TcEventSources Version="2">
 	<Source>
-		<GUID>{7E5E7629-9105-4DFE-8745-01BF6FDB54FC}</GUID>
+		<GUID>{7ECD5D33-5A13-448A-BF58-3B2353F6FADA}</GUID>
 		<Name LcId="1031">TcDALIEventClass</Name>
 		<Name LcId="1033">TcDALIEventClass</Name>
 		<Event>
@@ -173,6 +173,11 @@
 			<Id>34</Id>
 			<Message LcId="1031">Bei der Adressierung hat die Klemme einen fehlenden Response von einem Gerät erkannt.</Message>
 			<Message LcId="1033">During addressing the terminal detected a missing response of a device.</Message>
+		</Event>
+		<Event>
+			<Id>172</Id>
+			<Message LcId="1031"><![CDATA[Parameter 'nCommand' (aktueller Wert: {0}) ist kein gültiges Kommando.]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'nCommand' (actual value: {0}) is not a valid command.]]></Message>
 		</Event>
 		<Event>
 			<Id>173</Id>
@@ -601,8 +606,8 @@
 		</Event>
 		<Event>
 			<Id>258</Id>
-			<Message LcId="1031"><![CDATA[Parameter 'cTimeoutLockCommandBuffers' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (2...120 s).]]></Message>
-			<Message LcId="1033"><![CDATA[Parameter 'cTimeoutLockCommandBuffers' (actual value: {0}) lies outside of the valid range (2...120 s).]]></Message>
+			<Message LcId="1031"><![CDATA[Parameter 'cTimeoutTransaction' (aktueller Wert: {0}) liegt außerhalb des gültigen Bereichs (2...120 s).]]></Message>
+			<Message LcId="1033"><![CDATA[Parameter 'cTimeoutTransaction' (actual value: {0}) lies outside of the valid range (2...120 s).]]></Message>
 		</Event>
 		<Event>
 			<Id>259</Id>
